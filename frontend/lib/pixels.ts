@@ -1,11 +1,12 @@
-/* eslint-disable */
-// @ts-nocheck
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client'
 
 declare global {
   interface Window {
-    fbq?: (...args: unknown[]) => void
-    ttq?: { track: (...args: unknown[]) => void; page: () => void }
-    snaptr?: (...args: unknown[]) => void
+    fbq?: any
+    _fbq?: any
+    ttq?: any
+    snaptr?: any
   }
 }
 
@@ -13,19 +14,21 @@ declare global {
 
 export function initFacebookPixel(pixelId: string) {
   if (typeof window === 'undefined' || window.fbq) return
-  const f = window as Window & { fbq?: (...args: unknown[]) => void; _fbq?: unknown }
-  const n = (...args: unknown[]) => { (n as { queue?: unknown[]; callMethod?: (...a: unknown[]) => void }).callMethod ? (n as { callMethod: (...a: unknown[]) => void }).callMethod(...args) : ((n as { queue: unknown[] }).queue = (n as { queue: unknown[] }).queue || []).push(args) }
-  if (!f._fbq) f._fbq = n
-  f.fbq = n as (...args: unknown[]) => void;
-  (n as { push: typeof n; loaded: boolean; version: string; queue: unknown[] }).push = n;
-  (n as { push: typeof n; loaded: boolean; version: string; queue: unknown[] }).loaded = true;
-  (n as { push: typeof n; loaded: boolean; version: string; queue: unknown[] }).version = '2.0';
-  (n as { push: typeof n; loaded: boolean; version: string; queue: unknown[] }).queue = []
-  const t = document.createElement('script'); t.async = true
+  const n: any = function(...args: any[]) {
+    n.callMethod ? n.callMethod(...args) : n.queue.push(args)
+  }
+  n.push = n
+  n.loaded = true
+  n.version = '2.0'
+  n.queue = []
+  window.fbq = n
+  window._fbq = n
+  const t = document.createElement('script')
+  t.async = true
   t.src = 'https://connect.facebook.net/en_US/fbevents.js'
   document.head.appendChild(t)
-  window.fbq?.('init', pixelId)
-  window.fbq?.('track', 'PageView')
+  window.fbq('init', pixelId)
+  window.fbq('track', 'PageView')
 }
 
 export function fbTrack(event: string, params?: object, eventId?: string) {
@@ -41,10 +44,7 @@ export function initTikTokPixel(pixelId: string) {
   script.async = true
   script.src = `https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=${pixelId}&lib=ttq`
   document.head.appendChild(script)
-  window.ttq = {
-    track: (...args: unknown[]) => console.log('ttq.track', args),
-    page: () => {},
-  }
+  window.ttq = { track: () => {}, page: () => {} }
 }
 
 export function ttTrack(event: string, params?: object) {
@@ -60,8 +60,8 @@ export function initSnapchatPixel(pixelId: string) {
   script.async = true
   script.src = 'https://sc-static.net/scevent.min.js'
   document.head.appendChild(script)
-  const q: unknown[][] = []
-  window.snaptr = (...args: unknown[]) => { q.push(args) }
+  const q: any[][] = []
+  window.snaptr = (...args: any[]) => { q.push(args) }
   script.onload = () => {
     window.snaptr?.('init', pixelId)
     window.snaptr?.('track', 'PAGE_VIEW')
