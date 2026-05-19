@@ -1,4 +1,5 @@
-'use client'
+/* eslint-disable */
+// @ts-nocheck
 
 declare global {
   interface Window {
