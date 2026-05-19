@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import ProductImage from '@/components/common/ProductImage'
@@ -20,7 +20,7 @@ interface OrderData {
   created_at: string
 }
 
-export default function ThankYouPage() {
+function ThankYouContent() {
   const params = useSearchParams()
   const orderId = params.get('order')
   const [order, setOrder] = useState<OrderData | null>(null)
@@ -196,5 +196,13 @@ export default function ThankYouPage() {
         <p className="font-tajawal text-sm text-[#4A6555]">© 2026 RELAXIA — relaxia.store</p>
       </div>
     </div>
+  )
+}
+
+export default function ThankYouPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><p className="font-cairo text-brand-700">جاري التحميل...</p></div>}>
+      <ThankYouContent />
+    </Suspense>
   )
 }
