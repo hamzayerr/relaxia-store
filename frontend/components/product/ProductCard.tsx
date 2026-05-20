@@ -132,9 +132,9 @@ export default function ProductCard({ product }: { product: Product }) {
             </div>
             <div>
               <input
-                type="tel" placeholder="0612345678" value={form.phone}
+                type="tel" placeholder="0612345678" value={form.phone} dir="ltr" style={{textAlign: 'right'}}
                 onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
-                className="w-full border border-brand-200 rounded-xl px-4 py-3 font-tajawal text-sm text-right focus:outline-none focus:border-brand-500 bg-white"
+                className="w-full border border-brand-200 rounded-xl px-4 py-3 font-tajawal text-sm focus:outline-none focus:border-brand-500 bg-white"
               />
               {errors.phone && <p className="text-red-500 text-xs mt-1 font-tajawal">{errors.phone}</p>}
             </div>
@@ -169,20 +169,21 @@ export default function ProductCard({ product }: { product: Product }) {
             ))}
           </div>
 
-          {/* Details accordion */}
-          <details className="group border border-brand-100 rounded-xl">
-            <summary className="flex justify-between items-center px-4 py-3 cursor-pointer font-cairo font-bold text-brand-900 text-sm list-none">
-              طريقة الاستخدام
-              <span className="text-brand-700 group-open:rotate-180 transition-transform">▼</span>
-            </summary>
-            <div className="px-4 pb-4 space-y-1.5">
+          {/* طريقة الاستخدام */}
+          <div className="border border-brand-100 rounded-xl p-4 bg-brand-50">
+            <p className="font-cairo font-bold text-brand-900 text-sm mb-4 text-center">طريقة الاستخدام</p>
+            <div className="flex items-start justify-between gap-2">
               {product.howToUse.map((step, i) => (
-                <p key={i} className="font-tajawal text-sm text-[#4A6555] flex gap-2">
-                  <span className="text-brand-700 font-bold">{i + 1}.</span> {step}
-                </p>
+                <div key={i} className="flex-1 flex flex-col items-center text-center gap-2">
+                  <span className="w-8 h-8 rounded-full bg-brand-700 text-white font-cairo font-extrabold text-sm flex items-center justify-center flex-shrink-0">{i + 1}</span>
+                  <p className="font-tajawal text-xs text-brand-900 leading-snug">{step}</p>
+                  {i < product.howToUse.length - 1 && (
+                    <div className="hidden" />
+                  )}
+                </div>
               ))}
             </div>
-          </details>
+          </div>
         </div>
       </div>
 
