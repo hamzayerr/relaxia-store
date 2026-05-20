@@ -132,9 +132,9 @@ export default function ProductCard({ product }: { product: Product }) {
             </div>
             <div>
               <input
-                type="tel" placeholder="رقم الهاتف: 06XXXXXXXX" value={form.phone} dir="ltr"
+                type="tel" placeholder="0612345678" value={form.phone}
                 onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
-                className="w-full border border-brand-200 rounded-xl px-4 py-3 font-tajawal text-sm text-left focus:outline-none focus:border-brand-500 bg-white"
+                className="w-full border border-brand-200 rounded-xl px-4 py-3 font-tajawal text-sm text-right focus:outline-none focus:border-brand-500 bg-white"
               />
               {errors.phone && <p className="text-red-500 text-xs mt-1 font-tajawal">{errors.phone}</p>}
             </div>
