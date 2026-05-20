@@ -64,29 +64,22 @@ function ThankYouContent() {
         </div>
 
         {/* Call banner */}
-        <div className={`rounded-2xl p-6 mb-6 text-center ${businessHours ? 'bg-gold-500' : 'bg-brand-700'} text-white`}>
+        <div className="rounded-2xl p-6 mb-6 text-center bg-brand-700 text-white">
           <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-3">
             <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
           </div>
-          {businessHours ? (
-            <>
-              <h2 className="font-cairo font-extrabold text-2xl mb-2">سنتصل بك خلال أقل من 10 دقائق!</h2>
-              <p className="font-tajawal text-white/90 text-lg mb-1">
-                فريقنا سيتصل بك على {phone ? maskPhone(phone) : 'رقمك'} لتأكيد طلبك وعنوانك
-              </p>
-              <p className="font-tajawal text-white/70 text-sm">⏰ ساعات التواصل: من 9 صباحًا إلى 9 مساءً</p>
-            </>
-          ) : (
-            <>
-              <h2 className="font-cairo font-extrabold text-2xl mb-2">طلبك وصلنا بنجاح!</h2>
-              <p className="font-tajawal text-white/90 text-lg mb-1">
-                سنتصل بك على {phone ? maskPhone(phone) : 'رقمك'} بكرا الصباح لتأكيد طلبك
-              </p>
-              <p className="font-tajawal text-white/70 text-sm">📅 من الساعة 9 صباحًا</p>
-            </>
-          )}
+          <h2 className="font-cairo font-extrabold text-2xl mb-2">فريقنا سيتصل بك قريبًا!</h2>
+          <p className="font-tajawal text-white/90 text-lg mb-3">
+            سنتصل بك لتأكيد طلبك وعنوانك
+          </p>
+          <div className="bg-white/20 rounded-xl py-3 px-5 inline-block mb-2">
+            <p className="font-cairo font-extrabold text-2xl tracking-widest" dir="ltr">
+              {phone || 'رقمك'}
+            </p>
+          </div>
+          <p className="font-tajawal text-white/80 text-sm mt-2">التوصيل خلال 48 ساعة من تأكيد الطلب</p>
         </div>
 
         {/* Prep tips */}
@@ -146,8 +139,8 @@ function ThankYouContent() {
           <h3 className="font-cairo font-bold text-xl text-brand-900 mb-4 text-center">اش كيصراك دابا؟</h3>
           <div className="space-y-3">
             {[
-              { icon: '📞', text: 'خلال 10 دقائق — منتصلوا بيك لتأكيد' },
-              { icon: '📦', text: 'خلال 2-4 أيام — طلبيتك تصلك' },
+              { icon: '📞', text: 'فريقنا غادي يتصل بيك لتأكيد الطلب وعنوانك' },
+              { icon: '📦', text: 'التوصيل خلال 48 ساعة من تأكيد الطلب' },
               { icon: '🌿', text: 'من الأسبوع الأول — تبدا تحس الفرق' },
               { icon: '✨', text: 'بعد شهر — نتائج حقيقية وملموسة' },
             ].map((s, i) => (

@@ -1,26 +1,50 @@
 'use client'
 import { useState } from 'react'
-import { useCartStore } from '@/lib/store/cartStore'
+import { useRouter } from 'next/navigation'
 import ProductImage from '@/components/common/ProductImage'
-import { type Product, type OfferId, getOfferById, OFFERS } from '@/lib/products'
-import Button from '@/components/common/Button'
+import { type Product, type OfferId, getOfferById } from '@/lib/products'
 import StarRating from '@/components/common/StarRating'
 import OfferSelector from '@/components/common/OfferSelector'
 import PriceDisplay from '@/components/common/PriceDisplay'
-import TrustBadges from '@/components/common/TrustBadges'
 import ScarcityBanner from '@/components/common/ScarcityBanner'
-import { trackAddToCart } from '@/lib/pixels'
+import { trackAddToCart, trackInitiateCheckout } from '@/lib/pixels'
 import { ShieldCheck, Truck, Leaf } from 'lucide-react'
+import { createOrder } from '@/lib/api'
+import Button from '@/components/common/Button'
+
+const CITIES = ['الدار البيضاء','الرباط','مراكش','فاس','طنجة','أكادير','مكناس','وجدة','تطوان','القنيطرة','سلا','بني ملال','خريبكة','الجديدة','سطات','العرائش','الناظور','آسفي','الحسيمة','تازة']
 
 export default function ProductCard({ product }: { product: Product }) {
   const [selectedOffer, setSelectedOffer] = useState<OfferId>('two')
   const [activeImg, setActiveImg] = useState(0)
-  const addItem = useCartStore(s => s.addItem)
+  const [form, setForm] = useState({ name: '', phone: '', city: '' })
+  const [loading, setLoading] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const router = useRouter()
   const offer = getOfferById(selectedOffer)
 
-  const handleAdd = () => {
-    addItem(product, selectedOffer)
+  const validate = () => {
+    const e: Record<string, string> = {}
+    if (!form.name.trim() || form.name.trim().length < 2) e.name = 'أدخل اسمك الكامل'
+    if (!/^0[5-7]\d{8}$/.test(form.phone)) e.phone = 'رقم الهاتف غير صحيح'
+    if (!form.city.trim()) e.city = 'أدخل مدينتك'
+    return e
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const errs = validate()
+    if (Object.keys(errs).length) { setErrors(errs); return }
+    setLoading(true)
     trackAddToCart({ productId: product.id, productName: product.nameAr, price: offer.price, quantity: 1 })
+    trackInitiateCheckout({ value: offer.price, numItems: 1 })
+    try {
+      const eventId = `order_${Date.now()}`
+      const order = await createOrder(form, [{ product, offerId: selectedOffer, quantity: 1 }], offer.price, eventId)
+      router.push(`/thank-you?order=${order.order_id}`)
+    } catch {
+      setLoading(false)
+    }
   }
 
   return (
@@ -95,10 +119,41 @@ export default function ProductCard({ product }: { product: Product }) {
           {/* Scarcity */}
           <ScarcityBanner />
 
-          {/* CTA */}
-          <Button variant="primary" size="xl" fullWidth onClick={handleAdd}>
-            أضف للسلة — الدفع عند الاستلام ←
-          </Button>
+          {/* Inline order form */}
+          <form id="order-form" onSubmit={handleSubmit} className="space-y-3 bg-brand-50 rounded-2xl p-4 border border-brand-100">
+            <p className="font-cairo font-bold text-brand-900 text-sm text-center">أدخل معلوماتك لإتمام الطلب</p>
+            <div>
+              <input
+                type="text" placeholder="الاسم الكامل" value={form.name}
+                onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
+                className="w-full border border-brand-200 rounded-xl px-4 py-3 font-tajawal text-sm text-right focus:outline-none focus:border-brand-500 bg-white"
+              />
+              {errors.name && <p className="text-red-500 text-xs mt-1 font-tajawal">{errors.name}</p>}
+            </div>
+            <div>
+              <input
+                type="tel" placeholder="رقم الهاتف: 06XXXXXXXX" value={form.phone} dir="ltr"
+                onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
+                className="w-full border border-brand-200 rounded-xl px-4 py-3 font-tajawal text-sm text-left focus:outline-none focus:border-brand-500 bg-white"
+              />
+              {errors.phone && <p className="text-red-500 text-xs mt-1 font-tajawal">{errors.phone}</p>}
+            </div>
+            <div>
+              <input
+                type="text" placeholder="المدينة" value={form.city}
+                onChange={e => setForm(p => ({ ...p, city: e.target.value }))}
+                className="w-full border border-brand-200 rounded-xl px-4 py-3 font-tajawal text-sm text-right focus:outline-none focus:border-brand-500 bg-white"
+              />
+              {errors.city && <p className="text-red-500 text-xs mt-1 font-tajawal">{errors.city}</p>}
+            </div>
+            <button
+              type="submit" disabled={loading}
+              className="w-full bg-brand-700 hover:bg-brand-800 text-white font-cairo font-bold text-lg rounded-2xl py-4 transition-colors disabled:opacity-70"
+            >
+              {loading ? 'جاري الإرسال...' : `تأكيد الطلب — ${offer.price} درهم ←`}
+            </button>
+            <p className="text-center font-tajawal text-xs text-[#4A6555]">الدفع عند الاستلام — بدون بطاقة بنكية</p>
+          </form>
 
           {/* Mini trust */}
           <div className="grid grid-cols-3 gap-2">
@@ -132,25 +187,24 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
 
       {/* Sticky mobile CTA */}
-      <StickyBar product={product} selectedOffer={selectedOffer} onAdd={handleAdd} />
+      <StickyBar product={product} selectedOffer={selectedOffer} price={offer.price} />
     </section>
   )
 }
 
-function StickyBar({ product, selectedOffer, onAdd }: { product: Product; selectedOffer: OfferId; onAdd: () => void }) {
-  const offer = getOfferById(selectedOffer)
+function StickyBar({ product, price }: { product: Product; selectedOffer: OfferId; price: number }) {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-30 lg:hidden bg-white border-t border-brand-100 shadow-up p-3">
       <div className="flex items-center gap-3 max-w-md mx-auto">
         <div className="flex-1">
           <p className="font-cairo font-bold text-brand-900 text-sm truncate">{product.nameAr}</p>
           <p className="font-cairo font-extrabold text-brand-700 text-base" style={{ direction: 'ltr' }}>
-            {offer.price} درهم
+            {price} درهم
           </p>
         </div>
-        <Button variant="primary" size="md" onClick={onAdd} className="flex-shrink-0 text-sm">
-          أضف للسلة ←
-        </Button>
+        <a href="#order-form" className="bg-brand-700 text-white font-cairo font-bold text-sm rounded-xl px-4 py-2 flex-shrink-0">
+          اطلب الآن ←
+        </a>
       </div>
     </div>
   )

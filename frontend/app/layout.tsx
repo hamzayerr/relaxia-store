@@ -37,8 +37,9 @@ export const metadata: Metadata = {
     siteName: 'ريلاكسيا',
   },
   icons: {
-    icon: '/favicon.ico',
-    apple: '/favicon/apple-touch-icon.png',
+    icon: '/logo.png',
+    apple: '/logo.png',
+    shortcut: '/logo.png',
   },
 }
 

@@ -10,10 +10,10 @@ const config: Config = {
     extend: {
       colors: {
         cream: {
-          DEFAULT: '#EDE8D5',
-          dark: '#E0D8C0',
-          darker: '#D8D0B8',
-          light: '#F5F1E6',
+          DEFAULT: '#FAF8F4',
+          dark: '#F0EDE6',
+          darker: '#E8E4DC',
+          light: '#FFFFFF',
         },
         brand: {
           50:  '#F0F7F4',
