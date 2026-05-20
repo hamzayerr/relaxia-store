@@ -37,9 +37,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <ProductCard product={product} />
 
       {/* Trust bar */}
-      <div className="bg-brand-700 py-4">
+      <div className="bg-brand-50 border-y border-brand-100 py-4">
         <div className="container-custom">
-          <TrustBadges compact dark />
+          <TrustBadges compact />
         </div>
       </div>
 

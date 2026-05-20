@@ -29,8 +29,8 @@ export default function HowItWorks() {
         </div>
 
         {/* Stats bar */}
-        <div className="bg-brand-700 rounded-2xl p-5">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-white text-center">
+        <div className="bg-brand-50 border border-brand-100 rounded-2xl p-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             {[
               { num: '+60', label: 'مكوناً طبيعياً' },
               { num: '30', label: 'يوم ضمان' },
@@ -38,8 +38,8 @@ export default function HowItWorks() {
               { num: '+10,000', label: 'عميل راضي' },
             ].map(s => (
               <div key={s.label}>
-                <p className="font-cairo font-extrabold text-2xl text-gold-400">{s.num}</p>
-                <p className="font-tajawal text-white/70 text-sm">{s.label}</p>
+                <p className="font-cairo font-extrabold text-2xl text-brand-700">{s.num}</p>
+                <p className="font-tajawal text-brand-500 text-sm">{s.label}</p>
               </div>
             ))}
           </div>
