@@ -38,6 +38,10 @@ export default function ProductCard({ product }: { product: Product }) {
     setLoading(true)
     trackAddToCart({ productId: product.id, productName: product.nameAr, price: offer.price, quantity: 1 })
     trackInitiateCheckout({ value: offer.price, numItems: 1 })
+    // TikTok PlaceAnOrder event
+    if (typeof window !== 'undefined' && (window as any).ttq) {
+      (window as any).ttq.track('PlaceAnOrder', { value: offer.price, currency: 'MAD' })
+    }
     try {
       const eventId = `order_${Date.now()}`
       const order = await createOrder(form, [{ product, offerId: selectedOffer, quantity: 1 }], offer.price, eventId)
