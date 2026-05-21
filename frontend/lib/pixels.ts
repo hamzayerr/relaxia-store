@@ -40,11 +40,25 @@ export function fbTrack(event: string, params?: object, eventId?: string) {
 
 export function initTikTokPixel(pixelId: string) {
   if (typeof window === 'undefined' || window.ttq) return
-  const script = document.createElement('script')
-  script.async = true
-  script.src = `https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=${pixelId}&lib=ttq`
-  document.head.appendChild(script)
-  window.ttq = { track: () => {}, page: () => {} }
+  const w: any = window, d = document, t = 'ttq'
+  w.TiktokAnalyticsObject = t
+  const ttq = w[t] = w[t] || []
+  ttq.methods = ["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"]
+  ttq.setAndDefer = function(t: any, e: any) { t[e] = function() { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } }
+  for (let i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i])
+  ttq.load = function(e: any, n: any) {
+    const r = "https://analytics.tiktok.com/i18n/pixel/events.js"
+    ttq._i = ttq._i || {}; ttq._i[e] = []; ttq._i[e]._u = r
+    ttq._t = ttq._t || {}; ttq._t[e] = +new Date
+    ttq._o = ttq._o || {}; ttq._o[e] = n || {}
+    const script = d.createElement("script")
+    script.type = "text/javascript"; script.async = true
+    script.src = r + "?sdkid=" + e + "&lib=" + t
+    const s = d.getElementsByTagName("script")[0]
+    s.parentNode?.insertBefore(script, s)
+  }
+  ttq.load(pixelId)
+  ttq.page()
 }
 
 export function ttTrack(event: string, params?: object) {
