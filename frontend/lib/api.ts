@@ -76,7 +76,8 @@ export async function createOrder(
     return q
   }).join(' / ')
 
-  await sendToSheet({
+  // Fire and forget - don't wait for sheet
+  sendToSheet({
     orderId,
     date: formatDate(now),
     country: 'Morocco',
