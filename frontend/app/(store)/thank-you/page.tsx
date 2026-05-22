@@ -90,7 +90,7 @@ function ThankYouContent() {
               '📱 اعمل التليفون قريب منك',
               `✅ تأكد أن الرقم ${phone ? maskPhone(phone) : ''} صحيح ويرد`,
               '🏠 جهّز عنوانك الكامل للتوصيل',
-              '💰 الدفع يكون عند الاستلام — ما خسرتيش شي الآن',
+              '💰 الدفع عند استلام الطلب — لا دفع مسبق',
             ].map((tip, i) => (
               <p key={i} className="font-tajawal text-brand-900 flex gap-2 items-start">
                 <span>{tip}</span>

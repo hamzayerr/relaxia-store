@@ -73,7 +73,7 @@ export default function CheckoutModal() {
 
         <div className="p-6">
           <h2 className="font-cairo font-extrabold text-2xl text-brand-900 mb-1 text-center">تأكيد طلبك</h2>
-          <p className="text-center text-[#4A6555] font-tajawal text-sm mb-5">الدفع عند الاستلام — ما خسرتيش شي</p>
+          <p className="text-center text-[#4A6555] font-tajawal text-sm mb-5">الدفع عند الاستلام — الدفع عند استلام الطلب</p>
 
           {/* Order summary */}
           <div className="bg-brand-50 rounded-xl p-4 mb-5">

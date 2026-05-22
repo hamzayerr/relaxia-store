@@ -2,7 +2,7 @@ import { Truck, ShieldCheck, Leaf, FlaskConical } from 'lucide-react'
 
 export default function TrustBarSection() {
   const items = [
-    { Icon: ShieldCheck, title: 'الدفع عند الاستلام', sub: 'ما خسرتيش شي' },
+    { Icon: ShieldCheck, title: 'الدفع عند الاستلام', sub: 'الدفع عند استلام الطلب' },
     { Icon: Truck,       title: 'توصيل 48 ساعة',      sub: 'جميع مدن المغرب' },
     { Icon: ShieldCheck, title: 'ضمان 30 يوم',         sub: 'استرداد كامل' },
     { Icon: Leaf,        title: 'طبيعي 100%',          sub: 'بدون مواد كيميائية' },

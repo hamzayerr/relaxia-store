@@ -30,7 +30,7 @@ export default function GuaranteeSection() {
 
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              'الدفع عند الاستلام — ما خسرتيش شي الآن',
+              'الدفع عند الاستلام — الدفع عند استلام الطلب',
               'استرداد كامل بلا أسئلة',
               'ضمان حقيقي وشفاف',
             ].map(t => (

@@ -3,7 +3,7 @@ import { FlaskConical, ShieldCheck, Banknote, Leaf, Truck, Award } from 'lucide-
 const reasons = [
   { Icon: FlaskConical, title: 'مكونات مثبتة علميًا',   desc: 'نسب دقيقة في كل فورمولا — مو تخمين' },
   { Icon: ShieldCheck,  title: 'ضمان ذهبي 30 يوم',      desc: 'نرجعوا ليك فلوسك بلا أسئلة' },
-  { Icon: Banknote,     title: 'الدفع عند الاستلام',     desc: 'ما خسرتيش شي — كتدفع مللي تستلم' },
+  { Icon: Banknote,     title: 'الدفع عند الاستلام',     desc: 'الدفع عند استلام الطلب' },
   { Icon: Leaf,         title: 'طبيعي 100%',              desc: 'بدون مواد حافظة ضارة' },
   { Icon: Truck,        title: 'توصيل سريع 48 ساعة',    desc: 'في جميع مدن المغرب' },
   { Icon: Award,        title: 'صيدلية، مو متجر',        desc: 'سلطة علمية وتركيبة سريرية' },
