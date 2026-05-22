@@ -50,7 +50,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const validate = () => {
     const e: Record<string, string> = {}
     if (!form.name.trim() || form.name.trim().length < 2) e.name = 'أدخل اسمك الكامل'
-    if (!/^0[5-7]\d{8}$/.test(form.phone)) e.phone = 'رقم الهاتف غير صحيح'
+    if (!/^0[5-9]\d{8}$/.test(form.phone.trim())) e.phone = 'رقم الهاتف غير صحيح'
     if (!form.city.trim()) e.city = 'أدخل مدينتك'
     return e
   }
