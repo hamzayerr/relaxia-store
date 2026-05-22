@@ -33,6 +33,20 @@ function ThankYouContent() {
     fetchOrder(orderId).then(data => setOrder(data as OrderData)).catch(() => {})
   }, [orderId])
 
+  // Fire Purchase event on thank-you page
+  useEffect(() => {
+    if (!orderId) return
+    try {
+      const price = parseFloat(params.get('price') || '229')
+      if ((window as any).fbq) {
+        (window as any).fbq('track', 'Purchase', { value: price, currency: 'MAD' })
+      }
+      if ((window as any).ttq) {
+        (window as any).ttq.track('CompletePayment', { value: price, currency: 'MAD' })
+      }
+    } catch {}
+  }, [orderId])
+
   const businessHours = isBusinessHours()
   const name = order?.customer_name || params.get('name') || ''
   const phone = order?.phone || params.get('phone') || ''
