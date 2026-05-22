@@ -77,8 +77,10 @@ export default function ProductCard({ product }: { product: Product }) {
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'Purchase', { value: offer.price, currency: 'MAD', content_ids: [product.id], content_type: 'product' })
     }
-    // Redirect immediately using window.location for reliability
-    window.location.href = `/thank-you?order=${orderId}`
+    // Redirect after React render cycle
+    setTimeout(() => {
+      window.location.href = `/thank-you?order=${orderId}`
+    }, 100)
   }
 
   return (
