@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import ProductImage from '@/components/common/ProductImage'
 import { type Product, type OfferId, getOfferById } from '@/lib/products'
@@ -22,6 +22,30 @@ export default function ProductCard({ product }: { product: Product }) {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const router = useRouter()
   const offer = getOfferById(selectedOffer)
+
+  // Track ViewContent when product page loads
+  useEffect(() => {
+    const price = getOfferById('one').price
+    // Facebook ViewContent
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'ViewContent', {
+        content_ids: [product.id],
+        content_name: product.nameAr,
+        content_type: 'product',
+        value: price,
+        currency: 'MAD'
+      })
+    }
+    // TikTok ViewContent
+    if (typeof window !== 'undefined' && (window as any).ttq) {
+      (window as any).ttq.track('ViewContent', {
+        content_id: product.id,
+        content_name: product.nameAr,
+        value: price,
+        currency: 'MAD'
+      })
+    }
+  }, [product.id])
 
   const validate = () => {
     const e: Record<string, string> = {}
