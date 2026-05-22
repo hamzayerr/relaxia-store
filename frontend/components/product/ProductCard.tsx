@@ -72,20 +72,16 @@ export default function ProductCard({ product }: { product: Product }) {
       (window as any).fbq('track', 'AddToCart', { content_ids: [product.id], value: offer.price, currency: 'MAD' })
       (window as any).fbq('track', 'InitiateCheckout', { value: offer.price, currency: 'MAD', num_items: 1 })
     }
-    try {
-      const eventId = `order_${Date.now()}`
-      const orderPromise = createOrder(form, [{ product, offerId: selectedOffer, quantity: 1 }], offer.price, eventId)
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 800))
-      const result = await Promise.race([orderPromise, timeoutPromise])
-      const orderId = result ? result.order_id : `RLX-${Date.now()}`
-      // Facebook Purchase event
-      if (typeof window !== 'undefined' && (window as any).fbq) {
-        (window as any).fbq('track', 'Purchase', { value: offer.price, currency: 'MAD', content_ids: [product.id], content_type: 'product' })
-      }
-      router.push(`/thank-you?order=${orderId}`)
-    } catch {
-      setLoading(false)
+    // Generate order ID immediately and redirect
+    const orderId = `RLX-${new Date().toISOString().slice(0,10).replace(/-/g,'')}-${Math.floor(1000 + Math.random() * 9000)}`
+    // Send to sheets in background (no await)
+    createOrder(form, [{ product, offerId: selectedOffer, quantity: 1 }], offer.price, orderId).catch(() => {})
+    // Facebook Purchase event
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'Purchase', { value: offer.price, currency: 'MAD', content_ids: [product.id], content_type: 'product' })
     }
+    // Redirect immediately
+    router.push(`/thank-you?order=${orderId}`)
   }
 
   return (
