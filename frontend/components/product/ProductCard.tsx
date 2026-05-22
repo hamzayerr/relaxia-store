@@ -62,12 +62,14 @@ export default function ProductCard({ product }: { product: Product }) {
     setLoading(true)
     trackAddToCart({ productId: product.id, productName: product.nameAr, price: offer.price, quantity: 1 })
     trackInitiateCheckout({ value: offer.price, numItems: 1 })
-    // TikTok PlaceAnOrder event
+    // TikTok AddToCart + PlaceAnOrder events
     if (typeof window !== 'undefined' && (window as any).ttq) {
+      (window as any).ttq.track('AddToCart', { content_id: product.id, value: offer.price, currency: 'MAD' })
       (window as any).ttq.track('PlaceAnOrder', { value: offer.price, currency: 'MAD' })
     }
-    // Facebook InitiateCheckout event
+    // Facebook AddToCart + InitiateCheckout events
     if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'AddToCart', { content_ids: [product.id], value: offer.price, currency: 'MAD' })
       (window as any).fbq('track', 'InitiateCheckout', { value: offer.price, currency: 'MAD', num_items: 1 })
     }
     try {
