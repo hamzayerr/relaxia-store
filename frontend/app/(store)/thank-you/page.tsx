@@ -136,7 +136,7 @@ function ThankYouContent() {
 
         {/* Excitement timeline */}
         <div className="bg-brand-50 rounded-2xl p-6 mb-8">
-          <h3 className="font-cairo font-bold text-xl text-brand-900 mb-4 text-center">اش كيصراك دابا؟</h3>
+          <h3 className="font-cairo font-bold text-xl text-brand-900 mb-4 text-center">شنو غادي يوقع من بعد؟ 📞</h3>
           <div className="space-y-3">
             {[
               { icon: '📞', text: 'فريقنا غادي يتصل بيك لتأكيد الطلب وعنوانك' },
