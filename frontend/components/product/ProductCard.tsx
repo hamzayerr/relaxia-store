@@ -79,7 +79,7 @@ export default function ProductCard({ product }: { product: Product }) {
     }
     // Redirect after React render cycle
     setTimeout(() => {
-      window.location.href = `/thank-you?order=${orderId}`
+      window.location.href = `/thank-you?order=${orderId}&phone=${encodeURIComponent(form.phone)}&name=${encodeURIComponent(form.name)}`
     }, 100)
   }
 

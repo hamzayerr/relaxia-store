@@ -34,8 +34,8 @@ function ThankYouContent() {
   }, [orderId])
 
   const businessHours = isBusinessHours()
-  const name = order?.customer_name || ''
-  const phone = order?.phone || ''
+  const name = order?.customer_name || params.get('name') || ''
+  const phone = order?.phone || params.get('phone') || ''
 
   return (
     <div className="min-h-screen bg-[#FAFAF8]">
