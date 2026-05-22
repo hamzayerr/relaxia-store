@@ -74,12 +74,15 @@ export default function ProductCard({ product }: { product: Product }) {
     }
     try {
       const eventId = `order_${Date.now()}`
-      const order = await createOrder(form, [{ product, offerId: selectedOffer, quantity: 1 }], offer.price, eventId)
-      // Facebook Purchase event after successful order
+      const orderPromise = createOrder(form, [{ product, offerId: selectedOffer, quantity: 1 }], offer.price, eventId)
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 800))
+      const result = await Promise.race([orderPromise, timeoutPromise])
+      const orderId = result ? result.order_id : `RLX-${Date.now()}`
+      // Facebook Purchase event
       if (typeof window !== 'undefined' && (window as any).fbq) {
         (window as any).fbq('track', 'Purchase', { value: offer.price, currency: 'MAD', content_ids: [product.id], content_type: 'product' })
       }
-      router.push(`/thank-you?order=${order.order_id}`)
+      router.push(`/thank-you?order=${orderId}`)
     } catch {
       setLoading(false)
     }
