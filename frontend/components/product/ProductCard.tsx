@@ -56,18 +56,18 @@ export default function ProductCard({ product }: { product: Product }) {
     if (Object.keys(errs).length) { setErrors(errs); return }
     setErrors({})
     setLoading(true)
-    trackAddToCart({ productId: product.id, productName: product.nameAr, price: offer.price, quantity: 1 })
-    trackInitiateCheckout({ value: offer.price, numItems: 1 })
-    // TikTok AddToCart + PlaceAnOrder events
-    if (typeof window !== 'undefined' && (window as any).ttq) {
-      (window as any).ttq.track('AddToCart', { content_id: product.id, value: offer.price, currency: 'MAD' })
-      (window as any).ttq.track('PlaceAnOrder', { value: offer.price, currency: 'MAD' })
-    }
-    // Facebook AddToCart + InitiateCheckout events
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'AddToCart', { content_ids: [product.id], value: offer.price, currency: 'MAD' })
-      (window as any).fbq('track', 'InitiateCheckout', { value: offer.price, currency: 'MAD', num_items: 1 })
-    }
+    try { trackAddToCart({ productId: product.id, productName: product.nameAr, price: offer.price, quantity: 1 }) } catch {}
+    try { trackInitiateCheckout({ value: offer.price, numItems: 1 }) } catch {}
+    try {
+      if ((window as any).ttq) {
+        (window as any).ttq.track('AddToCart', { content_id: product.id, value: offer.price, currency: 'MAD' })
+        (window as any).ttq.track('PlaceAnOrder', { value: offer.price, currency: 'MAD' })
+      }
+      if ((window as any).fbq) {
+        (window as any).fbq('track', 'AddToCart', { content_ids: [product.id], value: offer.price, currency: 'MAD' })
+        (window as any).fbq('track', 'InitiateCheckout', { value: offer.price, currency: 'MAD', num_items: 1 })
+      }
+    } catch {}
     // Generate order ID immediately
     const d = new Date()
     const orderId = `RLX-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${Math.floor(1000 + Math.random() * 9000)}`
