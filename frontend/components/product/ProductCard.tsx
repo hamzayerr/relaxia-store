@@ -42,9 +42,17 @@ export default function ProductCard({ product }: { product: Product }) {
     if (typeof window !== 'undefined' && (window as any).ttq) {
       (window as any).ttq.track('PlaceAnOrder', { value: offer.price, currency: 'MAD' })
     }
+    // Facebook InitiateCheckout event
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'InitiateCheckout', { value: offer.price, currency: 'MAD', num_items: 1 })
+    }
     try {
       const eventId = `order_${Date.now()}`
       const order = await createOrder(form, [{ product, offerId: selectedOffer, quantity: 1 }], offer.price, eventId)
+      // Facebook Purchase event after successful order
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'Purchase', { value: offer.price, currency: 'MAD', content_ids: [product.id], content_type: 'product' })
+      }
       router.push(`/thank-you?order=${order.order_id}`)
     } catch {
       setLoading(false)
