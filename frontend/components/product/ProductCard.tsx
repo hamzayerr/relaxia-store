@@ -72,16 +72,17 @@ export default function ProductCard({ product }: { product: Product }) {
       (window as any).fbq('track', 'AddToCart', { content_ids: [product.id], value: offer.price, currency: 'MAD' })
       (window as any).fbq('track', 'InitiateCheckout', { value: offer.price, currency: 'MAD', num_items: 1 })
     }
-    // Generate order ID immediately and redirect
-    const orderId = `RLX-${new Date().toISOString().slice(0,10).replace(/-/g,'')}-${Math.floor(1000 + Math.random() * 9000)}`
-    // Send to sheets in background (no await)
+    // Generate order ID immediately
+    const d = new Date()
+    const orderId = `RLX-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${Math.floor(1000 + Math.random() * 9000)}`
+    // Send to sheets in background
     createOrder(form, [{ product, offerId: selectedOffer, quantity: 1 }], offer.price, orderId).catch(() => {})
     // Facebook Purchase event
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'Purchase', { value: offer.price, currency: 'MAD', content_ids: [product.id], content_type: 'product' })
     }
-    // Redirect immediately
-    router.push(`/thank-you?order=${orderId}`)
+    // Redirect immediately using window.location for reliability
+    window.location.href = `/thank-you?order=${orderId}`
   }
 
   return (
