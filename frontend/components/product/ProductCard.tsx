@@ -54,6 +54,7 @@ export default function ProductCard({ product }: { product: Product }) {
     if (form.phone.trim().length < 9) errs.phone = 'أدخل رقم هاتفك'
     if (!form.city.trim()) errs.city = 'أدخل مدينتك'
     if (Object.keys(errs).length) { setErrors(errs); return }
+    setErrors({})
     setLoading(true)
     trackAddToCart({ productId: product.id, productName: product.nameAr, price: offer.price, quantity: 1 })
     trackInitiateCheckout({ value: offer.price, numItems: 1 })
