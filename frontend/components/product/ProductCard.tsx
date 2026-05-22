@@ -47,17 +47,12 @@ export default function ProductCard({ product }: { product: Product }) {
     }
   }, [product.id])
 
-  const validate = () => {
-    const e: Record<string, string> = {}
-    if (!form.name.trim() || form.name.trim().length < 2) e.name = 'أدخل اسمك الكامل'
-    if (!/^0[5-9]\d{8}$/.test(form.phone.trim())) e.phone = 'رقم الهاتف غير صحيح'
-    if (!form.city.trim()) e.city = 'أدخل مدينتك'
-    return e
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const errs = validate()
+    const errs: Record<string, string> = {}
+    if (!form.name.trim()) errs.name = 'أدخل اسمك'
+    if (form.phone.trim().length < 9) errs.phone = 'أدخل رقم هاتفك'
+    if (!form.city.trim()) errs.city = 'أدخل مدينتك'
     if (Object.keys(errs).length) { setErrors(errs); return }
     setLoading(true)
     trackAddToCart({ productId: product.id, productName: product.nameAr, price: offer.price, quantity: 1 })
