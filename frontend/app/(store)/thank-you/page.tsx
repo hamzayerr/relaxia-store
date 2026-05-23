@@ -33,29 +33,23 @@ function ThankYouContent() {
     fetchOrder(orderId).then(data => setOrder(data as OrderData)).catch(() => {})
   }, [orderId])
 
-  // Fire Purchase event on thank-you page
+  // Fire Purchase event on thank-you page — wait 2s for pixels to load
   useEffect(() => {
     if (!orderId) return
     const price = parseFloat(params.get('price') || '229')
-    let fired = false
-    const fire = () => {
-      if (fired) return
-      fired = true
+    const t = setTimeout(() => {
       try {
         if ((window as any).fbq) {
           (window as any).fbq('track', 'Purchase', { value: price, currency: 'MAD' })
         }
+      } catch {}
+      try {
         if ((window as any).ttq) {
           (window as any).ttq.track('CompletePayment', { value: price, currency: 'MAD' })
         }
       } catch {}
-    }
-    if ((window as any).fbq) {
-      fire()
-    } else {
-      const t = setTimeout(fire, 2000)
-      return () => clearTimeout(t)
-    }
+    }, 2000)
+    return () => clearTimeout(t)
   }, [orderId])
 
   const businessHours = isBusinessHours()
