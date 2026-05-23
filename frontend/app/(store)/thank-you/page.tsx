@@ -2,6 +2,7 @@
 import { useEffect, useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
+import Script from 'next/script'
 import ProductImage from '@/components/common/ProductImage'
 import { fetchOrder } from '@/lib/api'
 import { isBusinessHours, maskPhone } from '@/lib/utils'
@@ -33,24 +34,6 @@ function ThankYouContent() {
     fetchOrder(orderId).then(data => setOrder(data as OrderData)).catch(() => {})
   }, [orderId])
 
-  // Fire Purchase event on thank-you page — wait 2s for pixels to load
-  useEffect(() => {
-    if (!orderId) return
-    const price = parseFloat(params.get('price') || '229')
-    const t = setTimeout(() => {
-      try {
-        if ((window as any).fbq) {
-          (window as any).fbq('track', 'Purchase', { value: price, currency: 'MAD' })
-        }
-      } catch {}
-      try {
-        if ((window as any).ttq) {
-          (window as any).ttq.track('CompletePayment', { value: price, currency: 'MAD' })
-        }
-      } catch {}
-    }, 2000)
-    return () => clearTimeout(t)
-  }, [orderId])
 
   const businessHours = isBusinessHours()
   const name = order?.customer_name || params.get('name') || ''
@@ -58,6 +41,21 @@ function ThankYouContent() {
 
   return (
     <div className="min-h-screen bg-[#FAFAF8]">
+      {orderId && (
+        <Script id="purchase-pixels" strategy="afterInteractive">{`
+          (function() {
+            var url = new URL(window.location.href);
+            var price = parseFloat(url.searchParams.get('price') || '229');
+            var orderId = url.searchParams.get('order') || '';
+            if (!orderId) return;
+            function fire() {
+              try { if (window.fbq) window.fbq('track', 'Purchase', { value: price, currency: 'MAD' }); } catch(e) {}
+              try { if (window.ttq) window.ttq.track('CompletePayment', { value: price, currency: 'MAD' }); } catch(e) {}
+            }
+            setTimeout(fire, 1500);
+          })();
+        `}</Script>
+      )}
       {/* Minimal header */}
       <div className="bg-white border-b border-brand-100 py-4">
         <div className="container-custom flex items-center gap-2">
