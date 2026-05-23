@@ -36,15 +36,26 @@ function ThankYouContent() {
   // Fire Purchase event on thank-you page
   useEffect(() => {
     if (!orderId) return
-    try {
-      const price = parseFloat(params.get('price') || '229')
-      if ((window as any).fbq) {
-        (window as any).fbq('track', 'Purchase', { value: price, currency: 'MAD' })
-      }
-      if ((window as any).ttq) {
-        (window as any).ttq.track('CompletePayment', { value: price, currency: 'MAD' })
-      }
-    } catch {}
+    const price = parseFloat(params.get('price') || '229')
+    let fired = false
+    const fire = () => {
+      if (fired) return
+      fired = true
+      try {
+        if ((window as any).fbq) {
+          (window as any).fbq('track', 'Purchase', { value: price, currency: 'MAD' })
+        }
+        if ((window as any).ttq) {
+          (window as any).ttq.track('CompletePayment', { value: price, currency: 'MAD' })
+        }
+      } catch {}
+    }
+    if ((window as any).fbq) {
+      fire()
+    } else {
+      const t = setTimeout(fire, 2000)
+      return () => clearTimeout(t)
+    }
   }, [orderId])
 
   const businessHours = isBusinessHours()
