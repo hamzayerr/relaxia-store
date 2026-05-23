@@ -47,10 +47,11 @@ function ThankYouContent() {
             var url = new URL(window.location.href);
             var price = parseFloat(url.searchParams.get('price') || '229');
             var orderId = url.searchParams.get('order') || '';
+            var pid = url.searchParams.get('pid') || 'coloflora';
             if (!orderId) return;
             function fire() {
-              try { if (window.fbq) window.fbq('track', 'Purchase', { value: price, currency: 'MAD' }); } catch(e) {}
-              try { if (window.ttq) window.ttq.track('CompletePayment', { value: price, currency: 'MAD' }); } catch(e) {}
+              try { if (window.fbq) window.fbq('track', 'Purchase', { value: price, currency: 'MAD', content_ids: [pid], content_type: 'product' }); } catch(e) {}
+              try { if (window.ttq) window.ttq.track('CompletePayment', { value: price, currency: 'MAD', content_id: pid, content_type: 'product', quantity: 1 }); } catch(e) {}
             }
             setTimeout(fire, 1500);
           })();
