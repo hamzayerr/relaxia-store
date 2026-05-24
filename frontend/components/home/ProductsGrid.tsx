@@ -23,11 +23,11 @@ export default function ProductsGrid() {
           {PRODUCTS.map(p => (
             <div key={p.id} className="card group overflow-hidden">
               {/* Image */}
-              <div className="relative h-52 bg-[#F5F1E6] overflow-hidden">
+              <div className="relative aspect-square bg-[#F5F1E6] overflow-hidden">
                 <ProductImage
                   src={p.images.hero} alt={p.nameAr}
                   productId={p.id} productNameAr={p.nameAr} productNameFr={p.nameFr}
-                  fill className="group-hover:scale-105 transition-transform duration-500"
+                  fill className="!object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                 />
                 <span className="absolute top-3 right-3 bg-brand-700 text-white font-cairo font-bold text-[10px] px-2 py-0.5 rounded-full">
                   {p.category === 'digestive' ? 'دعم الهضم' : 'المفاصل'}
