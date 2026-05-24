@@ -37,7 +37,7 @@ function AccordionSection({ title, links }: { title: string; links: { href: stri
     <div className="border-b border-brand-100">
       <button
         onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center justify-between py-4 text-right"
+        className="w-full flex items-center justify-between py-4"
       >
         <ChevronDown
           className={cn('w-5 h-5 text-brand-700 transition-transform', open && 'rotate-180')}
