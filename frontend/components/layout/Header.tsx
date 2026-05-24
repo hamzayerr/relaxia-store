@@ -36,26 +36,12 @@ export default function Header() {
   return (
     <>
       {/* Announcement bar — auto-rotating */}
-      <div className="bg-brand-900 text-white py-2 overflow-hidden relative">
+      <div className="bg-brand-900 text-white py-2.5 overflow-hidden relative">
         <div className="container-custom flex items-center justify-center gap-2 min-h-[20px]">
           <span className="text-sm">{ANNOUNCEMENTS[annIndex].icon}</span>
           <p key={annIndex} className="font-tajawal text-xs animate-fadeIn text-center">
             {ANNOUNCEMENTS[annIndex].text}
           </p>
-        </div>
-        {/* Dots indicator */}
-        <div className="flex items-center justify-center gap-1.5 mt-1">
-          {ANNOUNCEMENTS.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setAnnIndex(i)}
-              className={cn(
-                'h-1.5 rounded-full transition-all',
-                i === annIndex ? 'w-4 bg-white' : 'w-1.5 bg-white/40'
-              )}
-              aria-label={`Announcement ${i + 1}`}
-            />
-          ))}
         </div>
       </div>
 
