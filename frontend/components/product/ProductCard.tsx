@@ -92,8 +92,8 @@ export default function ProductCard({ product }: { product: Product }) {
           {(() => {
             const beforeAfterMap: Record<string, string> = {
               coloflora: '/images/before-after-coloflora.png?v=2',
-              flexima: '/images/before-after-flexima.png?v=1',
-              pylorex: '/images/before-after-pylorex.png?v=1',
+              flexima: '/images/before-after-flexima.png?v=3',
+              pylorex: '/images/before-after-pylorex.png?v=3',
             }
             const beforeAfter = beforeAfterMap[product.id]
             if (beforeAfter && activeImg === 0) {
