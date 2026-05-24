@@ -1,15 +1,16 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ShoppingCart, Menu, X, Truck, ShieldCheck, Wallet } from 'lucide-react'
+import { ShoppingCart, Menu, X, Truck, ShieldCheck, Wallet, RotateCcw, Award } from 'lucide-react'
 import { useCartStore } from '@/lib/store/cartStore'
 import { useUIStore } from '@/lib/store/uiStore'
 import { cn } from '@/lib/utils'
 import { PRODUCTS } from '@/lib/products'
 
 const ANNOUNCEMENTS = [
-  { Icon: Wallet, text: 'الدفع عند الاستلام في جميع أنحاء المغرب — ضمان 30 يوم أو استرداد كامل' },
-  { Icon: ShieldCheck, text: 'جرب بدون قلق — منتجات أصلية 100%' },
+  { Icon: Wallet, text: 'الدفع عند الاستلام في جميع أنحاء المغرب' },
+  { Icon: RotateCcw, text: 'ضمان 30 يوم أو استرداد كامل' },
+  { Icon: Award, text: 'جرب بدون قلق — منتجات أصلية 100%' },
   { Icon: Truck, text: 'توصيل سريع لجميع مناطق المغرب' },
 ]
 
