@@ -84,14 +84,14 @@ export default function Footer() {
               </span>
             </div>
           </div>
-          <p className="text-brand-500 text-sm font-tajawal leading-relaxed text-right">
+          <p className="text-brand-500 text-sm font-tajawal leading-relaxed text-center">
             الصحة الطبيعية — بقوة العلم.<br />
             مكملات طبيعية مثبتة علميًا، مصممة للمغربي.
           </p>
         </div>
 
-        {/* Badges — right aligned */}
-        <div className="flex flex-wrap items-center justify-start gap-2 mb-8">
+        {/* Badges — centered */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
           {BADGES.map(b => (
             <span
               key={b}
