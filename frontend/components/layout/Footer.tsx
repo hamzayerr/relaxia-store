@@ -75,7 +75,14 @@ export default function Footer() {
         <div className="text-center mb-6">
           <div className="flex items-center justify-center gap-2.5 mb-4">
             <img src="/logo.png" alt="RELAXIA" className="h-10 w-10 object-contain mix-blend-multiply" />
-            <span className="font-cairo font-extrabold text-xl tracking-wide text-brand-900">RELAXIA</span>
+            <div className="flex flex-col leading-tight">
+              <span className="font-cairo font-extrabold text-xl text-brand-900 tracking-wide">
+                ريلاكسيا
+              </span>
+              <span className="font-cairo font-bold text-xs text-brand-700 tracking-widest">
+                RELAXIA
+              </span>
+            </div>
           </div>
           <p className="text-brand-500 text-sm font-tajawal leading-relaxed max-w-md mx-auto">
             الصحة الطبيعية — بقوة العلم.<br />
@@ -83,8 +90,8 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+        {/* Badges — left aligned */}
+        <div className="flex flex-wrap items-center justify-end gap-2 mb-8 max-w-xl mx-auto">
           {BADGES.map(b => (
             <span
               key={b}
