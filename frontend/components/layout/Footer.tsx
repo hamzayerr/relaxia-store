@@ -71,11 +71,10 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-brand-100 mt-10">
       <div className="container-custom py-10">
-        {/* Brand */}
-        <div className="text-center mb-6">
-          <div className="flex items-center justify-center gap-2.5 mb-4">
-            <img src="/logo.png" alt="RELAXIA" className="h-10 w-10 object-contain mix-blend-multiply" />
-            <div className="flex flex-col leading-tight">
+        {/* Brand — right aligned */}
+        <div className="text-right mb-6">
+          <div className="flex items-center justify-end gap-2.5 mb-4">
+            <div className="flex flex-col leading-tight text-right">
               <span className="font-cairo font-extrabold text-xl text-brand-900 tracking-wide">
                 ريلاكسيا
               </span>
@@ -83,15 +82,16 @@ export default function Footer() {
                 RELAXIA
               </span>
             </div>
+            <img src="/logo.png" alt="RELAXIA" className="h-10 w-10 object-contain mix-blend-multiply" />
           </div>
-          <p className="text-brand-500 text-sm font-tajawal leading-relaxed max-w-md mx-auto">
+          <p className="text-brand-500 text-sm font-tajawal leading-relaxed">
             الصحة الطبيعية — بقوة العلم.<br />
             مكملات طبيعية مثبتة علميًا، مصممة للمغربي.
           </p>
         </div>
 
         {/* Badges — centered */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-8 max-w-xl mx-auto">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
           {BADGES.map(b => (
             <span
               key={b}
@@ -102,8 +102,8 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Accordion sections — right-aligned */}
-        <div className="max-w-md mr-0 ml-auto" dir="rtl">
+        {/* Accordion sections — full width with right-aligned titles */}
+        <div>
           {SECTIONS.map(s => (
             <AccordionSection key={s.title} title={s.title} links={s.links} />
           ))}
