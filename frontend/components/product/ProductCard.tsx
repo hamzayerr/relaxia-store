@@ -126,9 +126,8 @@ export default function ProductCard({ product }: { product: Product }) {
           )}
 
           {/* Trust badges */}
-          <div className="grid grid-cols-4 gap-2 mt-4">
+          <div className="grid grid-cols-3 gap-2 mt-4">
             {[
-              { label: 'مصنوع في', sub: 'المغرب' },
               { label: 'طبيعي', sub: '100%' },
               { label: '30 كبسولة', sub: 'لكل علبة' },
               { label: 'ضمان', sub: '30 يوم' },
