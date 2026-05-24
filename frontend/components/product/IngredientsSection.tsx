@@ -9,7 +9,7 @@ export default function IngredientsSection({ product }: { product: Product }) {
           <div className="lg:container-custom">
             <div className="lg:max-w-5xl lg:mx-auto">
               <img
-                src="/images/ingredients-coloflora.png"
+                src="/images/ingredients-coloflora.png?v=2"
                 alt="مكونات كولوفلورا"
                 className="h-auto lg:w-full lg:rounded-2xl lg:shadow-lg max-w-none lg:max-w-full"
                 style={{ width: 'min(900px, 200vw)' }}
