@@ -49,7 +49,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'coloflora',
     slug: 'coloflora',
-    sku: 'RLX-COL-30',
+    sku: 'colon30',
     nameAr: 'كولوفلورا',
     nameFr: 'COLOFLORA',
     taglineAr: 'ريّح قولونك من الداخل — بدون أدوية قاسية',
@@ -122,7 +122,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'pylorex',
     slug: 'pylorex',
-    sku: 'RLX-PYL-30',
+    sku: 'gastro-balance30',
     nameAr: 'بيلوريكس',
     nameFr: 'PYLOREX',
     taglineAr: 'قاوم جرثومة المعدة طبيعيًا — من جذورها',
@@ -192,7 +192,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'flexima',
     slug: 'flexima',
-    sku: 'RLX-FLX-100',
+    sku: 'joint-creme',
     nameAr: 'فليكسيما',
     nameFr: 'FLEXIMA',
     taglineAr: 'ارجع تتحرك بحرية — بدون ألم',
