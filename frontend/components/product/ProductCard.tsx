@@ -166,26 +166,45 @@ export default function ProductCard({ product }: { product: Product }) {
           {/* Description */}
           <p className="font-tajawal text-[#4A6555] text-sm leading-relaxed">{product.subTaglineAr}</p>
 
-          {/* Benefits checklist (COLOFLORA only) */}
-          {product.id === 'coloflora' && (
-            <ul className="space-y-2">
-              {[
+          {/* Benefits checklist (per product) */}
+          {(() => {
+            const benefitsMap: Record<string, string[]> = {
+              coloflora: [
                 'يدعم الهضم',
                 'يخفف الشعور بالنفخة',
                 'يساعد على توازن الأمعاء',
                 'مكونات طبيعية آمنة',
-              ].map((benefit, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  <span className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-700 text-white flex items-center justify-center">
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </span>
-                  <span className="font-tajawal text-brand-900 text-sm">{benefit}</span>
-                </li>
-              ))}
-            </ul>
-          )}
+              ],
+              pylorex: [
+                'يحارب جرثومة المعدة طبيعيًا',
+                'يخفف الحرقة والألم',
+                'يدعم بطانة المعدة',
+                'مكونات طبيعية 100% آمنة',
+              ],
+              flexima: [
+                'يخفف آلام المفاصل',
+                'يقوي العضلات',
+                'تأثير سريع ومريح',
+                'مكونات طبيعية 100%',
+              ],
+            }
+            const benefits = benefitsMap[product.id]
+            if (!benefits) return null
+            return (
+              <ul className="space-y-2">
+                {benefits.map((benefit, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-brand-700 text-white flex items-center justify-center">
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </span>
+                    <span className="font-tajawal text-brand-900 text-sm">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            )
+          })()}
 
           {/* Stars */}
           <StarRating rating={product.rating} count={product.reviewCount} size="lg" />
