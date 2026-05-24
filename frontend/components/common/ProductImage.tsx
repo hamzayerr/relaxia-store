@@ -87,7 +87,7 @@ export default function ProductImage({
     return (
       <Image
         src={src} alt={alt} fill priority={priority}
-        className={cn('object-contain', className)}
+        className={cn('object-cover', className)}
         sizes={sizes || '(max-width: 768px) 100vw, 50vw'}
         onError={() => setError(true)}
       />
