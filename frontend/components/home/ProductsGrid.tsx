@@ -19,7 +19,7 @@ export default function ProductsGrid() {
           <p className="section-subheading">كل فورمولا مصممة لمشكلة محددة — بمكونات مثبتة ونسب دقيقة</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-3 gap-3 sm:gap-5">
           {PRODUCTS.map(p => (
             <div key={p.id} className="card group overflow-hidden">
               {/* Image */}
