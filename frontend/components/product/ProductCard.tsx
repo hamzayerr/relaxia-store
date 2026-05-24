@@ -89,21 +89,27 @@ export default function ProductCard({ product }: { product: Product }) {
 
         {/* Images */}
         <div className="space-y-3">
-          <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-brand-50">
-            <ProductImage
-              src={
-                product.id === 'coloflora' && activeImg === 0
-                  ? '/images/before-after-coloflora.png?v=2'
-                  : (product.images.gallery[activeImg] || product.images.hero)
-              }
-              alt={product.nameAr}
-              productId={product.id}
-              productNameAr={product.nameAr}
-              productNameFr={product.nameFr}
-              fill
-              priority
-            />
-          </div>
+          {product.id === 'coloflora' && activeImg === 0 ? (
+            <div className="rounded-2xl overflow-hidden bg-brand-50">
+              <img
+                src="/images/before-after-coloflora.png?v=2"
+                alt={product.nameAr}
+                className="w-full h-auto"
+              />
+            </div>
+          ) : (
+            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-brand-50">
+              <ProductImage
+                src={product.images.gallery[activeImg] || product.images.hero}
+                alt={product.nameAr}
+                productId={product.id}
+                productNameAr={product.nameAr}
+                productNameFr={product.nameFr}
+                fill
+                priority
+              />
+            </div>
+          )}
           {product.images.gallery.length > 1 && (
             <div className="flex gap-2">
               {product.images.gallery.map((img, i) => (
