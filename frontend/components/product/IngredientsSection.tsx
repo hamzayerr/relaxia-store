@@ -1,19 +1,23 @@
 import type { Product } from '@/lib/products'
 
 export default function IngredientsSection({ product }: { product: Product }) {
-  // COLOFLORA: show single image full-width (edge-to-edge on mobile)
+  // COLOFLORA: single image — horizontal scroll on mobile for clarity, centered on desktop
   if (product.id === 'coloflora') {
     return (
       <section className="py-8 lg:py-14">
-        <div className="lg:container-custom">
-          <div className="lg:max-w-5xl lg:mx-auto">
-            <img
-              src="/images/ingredients-coloflora.png"
-              alt="مكونات كولوفلورا"
-              className="w-full h-auto lg:rounded-2xl lg:shadow-lg"
-            />
+        <div className="overflow-x-auto lg:overflow-visible">
+          <div className="lg:container-custom">
+            <div className="lg:max-w-5xl lg:mx-auto">
+              <img
+                src="/images/ingredients-coloflora.png"
+                alt="مكونات كولوفلورا"
+                className="h-auto lg:w-full lg:rounded-2xl lg:shadow-lg max-w-none lg:max-w-full"
+                style={{ width: 'min(900px, 200vw)' }}
+              />
+            </div>
           </div>
         </div>
+        <p className="lg:hidden text-center font-tajawal text-xs text-brand-700 mt-2">← اسحب لرؤية كل المكونات →</p>
       </section>
     )
   }
