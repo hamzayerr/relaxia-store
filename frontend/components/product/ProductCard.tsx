@@ -93,7 +93,7 @@ export default function ProductCard({ product }: { product: Product }) {
             <ProductImage
               src={
                 product.id === 'coloflora' && activeImg === 0
-                  ? '/images/before-after-coloflora.png'
+                  ? '/images/before-after-coloflora.png?v=2'
                   : (product.images.gallery[activeImg] || product.images.hero)
               }
               alt={product.nameAr}

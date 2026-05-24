@@ -10,7 +10,7 @@ export default function ProblemSection({ product }: { product: Product }) {
           <div className="max-w-3xl mx-auto mb-10">
             <div className="rounded-3xl overflow-hidden shadow-xl">
               <img
-                src="/images/man-coloflora.jpg"
+                src="/images/man-coloflora.jpg?v=2"
                 alt="COLOFLORA Before/After"
                 className="w-full h-auto object-cover"
               />
