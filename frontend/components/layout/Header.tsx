@@ -64,9 +64,14 @@ export default function Header() {
                 alt="RELAXIA"
                 className="h-10 w-10 object-contain mix-blend-multiply"
               />
-              <span className="font-cairo font-extrabold text-xl text-brand-900 tracking-wide hidden sm:block">
-                RELAXIA
-              </span>
+              <div className="flex flex-col leading-tight">
+                <span className="font-cairo font-extrabold text-base sm:text-xl text-brand-900 tracking-wide">
+                  ريلاكسيا
+                </span>
+                <span className="font-cairo font-bold text-[10px] sm:text-xs text-brand-700 tracking-widest">
+                  RELAXIA
+                </span>
+              </div>
             </Link>
 
             {/* Desktop Nav */}
