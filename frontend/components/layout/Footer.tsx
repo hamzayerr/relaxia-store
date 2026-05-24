@@ -73,7 +73,8 @@ export default function Footer() {
       <div className="container-custom py-10">
         {/* Brand — right aligned */}
         <div className="text-right mb-6">
-          <div className="flex items-center justify-end gap-2.5 mb-4">
+          <div className="flex items-center justify-start gap-2.5 mb-4">
+            <img src="/logo.png" alt="RELAXIA" className="h-10 w-10 object-contain mix-blend-multiply" />
             <div className="flex flex-col leading-tight text-right">
               <span className="font-cairo font-extrabold text-xl text-brand-900 tracking-wide">
                 ريلاكسيا
@@ -82,7 +83,6 @@ export default function Footer() {
                 RELAXIA
               </span>
             </div>
-            <img src="/logo.png" alt="RELAXIA" className="h-10 w-10 object-contain mix-blend-multiply" />
           </div>
           <p className="text-brand-500 text-sm font-tajawal leading-relaxed">
             الصحة الطبيعية — بقوة العلم.<br />
