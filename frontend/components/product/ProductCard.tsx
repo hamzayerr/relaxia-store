@@ -142,21 +142,18 @@ export default function ProductCard({ product }: { product: Product }) {
 
         {/* Info */}
         <div className="space-y-5">
-          {/* Badge */}
-          <span className="inline-block bg-brand-100 text-brand-700 font-cairo font-bold text-xs px-3 py-1 rounded-full">
-            {product.category === 'digestive' ? '🌿 دعم الهضم' : '🦴 صحة المفاصل'}
-          </span>
-
-          {/* Name */}
-          <h1 className="font-cairo font-extrabold text-3xl sm:text-4xl text-brand-900">
+          {/* Name (small, above headline) */}
+          <h1 className="font-cairo font-bold text-base text-brand-700">
             {product.nameAr}
           </h1>
 
-          {/* Tagline */}
-          <p className="font-tajawal text-[#4A6555] text-lg leading-relaxed">{product.taglineAr}</p>
+          {/* Headline — big bold tagline */}
+          <h2 className="font-cairo font-extrabold text-2xl sm:text-3xl text-brand-900 leading-tight">
+            {product.taglineAr}
+          </h2>
 
           {/* Description */}
-          <p className="font-tajawal text-[#4A6555] text-sm leading-relaxed">{product.subTaglineAr}</p>
+          <p className="font-tajawal text-[#4A6555] text-base leading-relaxed">{product.subTaglineAr}</p>
 
           {/* Benefits checklist (COLOFLORA only) */}
           {product.id === 'coloflora' && (
