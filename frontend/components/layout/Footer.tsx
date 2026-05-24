@@ -90,8 +90,8 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Badges — centered */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
+        {/* Badges — right aligned */}
+        <div className="flex flex-wrap items-center justify-start gap-2 mb-8">
           {BADGES.map(b => (
             <span
               key={b}
