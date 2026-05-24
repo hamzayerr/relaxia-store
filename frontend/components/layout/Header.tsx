@@ -1,16 +1,16 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ShoppingCart, Menu, X } from 'lucide-react'
+import { ShoppingCart, Menu, X, Truck, ShieldCheck, Wallet } from 'lucide-react'
 import { useCartStore } from '@/lib/store/cartStore'
 import { useUIStore } from '@/lib/store/uiStore'
 import { cn } from '@/lib/utils'
 import { PRODUCTS } from '@/lib/products'
 
 const ANNOUNCEMENTS = [
-  { icon: '💰', text: 'الدفع عند الاستلام في جميع أنحاء المغرب — ضمان 30 يوم أو استرداد كامل' },
-  { icon: '🏅', text: 'جرب بدون قلق — منتجات أصلية 100%' },
-  { icon: '🚚', text: 'توصيل سريع لجميع مناطق المغرب' },
+  { Icon: Wallet, text: 'الدفع عند الاستلام في جميع أنحاء المغرب — ضمان 30 يوم أو استرداد كامل' },
+  { Icon: ShieldCheck, text: 'جرب بدون قلق — منتجات أصلية 100%' },
+  { Icon: Truck, text: 'توصيل سريع لجميع مناطق المغرب' },
 ]
 
 export default function Header() {
@@ -37,9 +37,12 @@ export default function Header() {
     <>
       {/* Announcement bar — auto-rotating */}
       <div className="bg-brand-900 text-white py-2.5 overflow-hidden relative">
-        <div className="container-custom flex items-center justify-center gap-2 min-h-[20px]">
-          <span className="text-sm">{ANNOUNCEMENTS[annIndex].icon}</span>
-          <p key={annIndex} className="font-tajawal text-xs animate-fadeIn text-center">
+        <div key={annIndex} className="container-custom flex items-center justify-center gap-2 min-h-[20px] animate-fadeIn">
+          {(() => {
+            const Icon = ANNOUNCEMENTS[annIndex].Icon
+            return <Icon className="w-4 h-4 flex-shrink-0" />
+          })()}
+          <p className="font-tajawal text-xs text-center">
             {ANNOUNCEMENTS[annIndex].text}
           </p>
         </div>
