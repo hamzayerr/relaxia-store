@@ -102,8 +102,8 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Accordion sections — right-aligned in RTL */}
-        <div className="max-w-xl me-auto">
+        {/* Accordion sections — right-aligned */}
+        <div className="max-w-xl ml-auto mr-0">
           {SECTIONS.map(s => (
             <AccordionSection key={s.title} title={s.title} links={s.links} />
           ))}
