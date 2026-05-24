@@ -59,9 +59,9 @@ export const PRODUCTS: Product[] = [
     capsules: 30,
     category: 'digestive',
     images: {
-      hero: '/images/products/coloflora/hero.png',
+      hero: '/images/products/coloflora/hero.png?v=2',
       gallery: [
-        '/images/products/coloflora/hero.png',
+        '/images/products/coloflora/hero.png?v=2',
       ],
     },
     ingredients: [
@@ -132,9 +132,9 @@ export const PRODUCTS: Product[] = [
     capsules: 30,
     category: 'digestive',
     images: {
-      hero: '/images/products/pylorex/hero.png',
+      hero: '/images/products/pylorex/hero.png?v=2',
       gallery: [
-        '/images/products/pylorex/hero.png',
+        '/images/products/pylorex/hero.png?v=2',
       ],
     },
     ingredients: [
@@ -202,9 +202,9 @@ export const PRODUCTS: Product[] = [
     volume: '100ml',
     category: 'joints',
     images: {
-      hero: '/images/products/flexima/hero.png',
+      hero: '/images/products/flexima/hero.png?v=2',
       gallery: [
-        '/images/products/flexima/hero.png',
+        '/images/products/flexima/hero.png?v=2',
       ],
     },
     ingredients: [
