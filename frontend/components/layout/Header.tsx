@@ -52,8 +52,8 @@ export default function Header() {
       <header className={cn(
         'sticky top-0 left-0 right-0 z-40 transition-all duration-300 border-b',
         scrolled
-          ? 'bg-[#EDE8D5]/95 backdrop-blur-md shadow-sm border-[#D8D0B8]'
-          : 'bg-[#EDE8D5] border-[#E0D8C0]'
+          ? 'bg-white/95 backdrop-blur-md shadow-sm border-brand-100'
+          : 'bg-white border-brand-100'
       )}>
         <div className="container-custom">
           <div className="flex items-center justify-between h-16 sm:h-18">
