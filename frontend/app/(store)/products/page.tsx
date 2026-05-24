@@ -18,8 +18,8 @@ function ProductFullCard({ product }: { product: typeof PRODUCTS[0] }) {
     <div className="card overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Image */}
-        <div className="relative h-64 md:h-auto min-h-[280px] bg-brand-50">
-          <ProductImage src={product.images.hero} alt={product.nameAr} productId={product.id} productNameAr={product.nameAr} productNameFr={product.nameFr} fill />
+        <div className="relative aspect-square md:aspect-auto md:h-auto md:min-h-[320px] bg-brand-50">
+          <ProductImage src={product.images.hero} alt={product.nameAr} productId={product.id} productNameAr={product.nameAr} productNameFr={product.nameFr} fill className="!object-contain p-3" />
         </div>
 
         {/* Info */}
