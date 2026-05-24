@@ -7,9 +7,16 @@ import { useUIStore } from '@/lib/store/uiStore'
 import { cn } from '@/lib/utils'
 import { PRODUCTS } from '@/lib/products'
 
+const ANNOUNCEMENTS = [
+  { icon: '🚚', text: 'الدفع عند الاستلام في جميع أنحاء المغرب — ضمان 30 يوم أو استرداد كامل' },
+  { icon: '🏅', text: 'جرب بدون قلق — منتجات أصلية 100%' },
+  { icon: '⚡', text: 'توصيل سريع لجميع مناطق المغرب' },
+]
+
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [annIndex, setAnnIndex] = useState(0)
   const itemCount = useCartStore(s => s.itemCount())
   const openCart = useCartStore(s => s.openCart)
 
@@ -19,13 +26,37 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    const t = setInterval(() => {
+      setAnnIndex(i => (i + 1) % ANNOUNCEMENTS.length)
+    }, 3500)
+    return () => clearInterval(t)
+  }, [])
+
   return (
     <>
-      {/* Announcement bar */}
-      <div className="bg-brand-900 text-white text-center py-2">
-        <p className="font-tajawal text-xs">
-          الدفع عند الاستلام في جميع أنحاء المغرب — ضمان 30 يوم أو استرداد كامل
-        </p>
+      {/* Announcement bar — auto-rotating */}
+      <div className="bg-brand-900 text-white py-2 overflow-hidden relative">
+        <div className="container-custom flex items-center justify-center gap-2 min-h-[20px]">
+          <span className="text-sm">{ANNOUNCEMENTS[annIndex].icon}</span>
+          <p key={annIndex} className="font-tajawal text-xs animate-fadeIn text-center">
+            {ANNOUNCEMENTS[annIndex].text}
+          </p>
+        </div>
+        {/* Dots indicator */}
+        <div className="flex items-center justify-center gap-1.5 mt-1">
+          {ANNOUNCEMENTS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setAnnIndex(i)}
+              className={cn(
+                'h-1.5 rounded-full transition-all',
+                i === annIndex ? 'w-4 bg-white' : 'w-1.5 bg-white/40'
+              )}
+              aria-label={`Announcement ${i + 1}`}
+            />
+          ))}
+        </div>
       </div>
 
       <header className={cn(
