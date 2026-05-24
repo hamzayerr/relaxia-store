@@ -1,15 +1,29 @@
 import type { Product } from '@/lib/products'
 
+const INGREDIENT_IMAGES: Record<string, string> = {
+  coloflora: '/images/ingredients-coloflora.png?v=3',
+  pylorex: '/images/ingredients-pylorex.png?v=1',
+  flexima: '/images/ingredients-flexima.png?v=1',
+}
+
+const ALT_TEXTS: Record<string, string> = {
+  coloflora: 'مكونات كولوفلورا',
+  pylorex: 'مكونات بيلوريكس',
+  flexima: 'مكونات فليكسيما',
+}
+
 export default function IngredientsSection({ product }: { product: Product }) {
-  // COLOFLORA: single image — full width, edge-to-edge on mobile
-  if (product.id === 'coloflora') {
+  const ingredientImage = INGREDIENT_IMAGES[product.id]
+
+  // If we have an image for this product, show single image (full width on mobile, centered on desktop)
+  if (ingredientImage) {
     return (
       <section className="py-8 lg:py-14">
         <div className="lg:container-custom">
           <div className="lg:max-w-5xl lg:mx-auto">
             <img
-              src="/images/ingredients-coloflora.png?v=3"
-              alt="مكونات كولوفلورا"
+              src={ingredientImage}
+              alt={ALT_TEXTS[product.id] || 'المكونات'}
               className="w-full h-auto lg:rounded-2xl lg:shadow-lg"
             />
           </div>
@@ -18,6 +32,7 @@ export default function IngredientsSection({ product }: { product: Product }) {
     )
   }
 
+  // Fallback: card grid
   return (
     <section className="py-14">
       <div className="container-custom">
