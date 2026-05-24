@@ -8,9 +8,9 @@ import { cn } from '@/lib/utils'
 import { PRODUCTS } from '@/lib/products'
 
 const ANNOUNCEMENTS = [
-  { icon: '🚚', text: 'الدفع عند الاستلام في جميع أنحاء المغرب — ضمان 30 يوم أو استرداد كامل' },
+  { icon: '💰', text: 'الدفع عند الاستلام في جميع أنحاء المغرب — ضمان 30 يوم أو استرداد كامل' },
   { icon: '🏅', text: 'جرب بدون قلق — منتجات أصلية 100%' },
-  { icon: '⚡', text: 'توصيل سريع لجميع مناطق المغرب' },
+  { icon: '🚚', text: 'توصيل سريع لجميع مناطق المغرب' },
 ]
 
 export default function Header() {
