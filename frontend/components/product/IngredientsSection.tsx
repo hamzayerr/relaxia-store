@@ -24,10 +24,6 @@ export default function IngredientsSection({ product }: { product: Product }) {
             </div>
           ))}
         </div>
-
-        <p className="text-center font-tajawal text-sm text-[#4A6555] mt-8">
-          * هذا المنتج ليس مخصصًا لتشخيص أو علاج أو شفاء أو منع أي مرض. هذا مكمل غذائي وليس دواء.
-        </p>
       </div>
     </section>
   )
