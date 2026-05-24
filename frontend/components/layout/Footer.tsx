@@ -103,7 +103,7 @@ export default function Footer() {
         </div>
 
         {/* Accordion sections — right-aligned */}
-        <div className="max-w-xl ml-auto mr-0">
+        <div className="w-full sm:w-2/3 ml-auto">
           {SECTIONS.map(s => (
             <AccordionSection key={s.title} title={s.title} links={s.links} />
           ))}
