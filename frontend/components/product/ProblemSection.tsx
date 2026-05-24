@@ -1,17 +1,23 @@
 import type { Product } from '@/lib/products'
 
+const MAN_IMAGES: Record<string, string> = {
+  coloflora: '/images/man-coloflora.jpg?v=2',
+  pylorex: '/images/man-pylorex.jpg?v=1',
+  flexima: '/images/man-flexima.jpg?v=1',
+}
+
 export default function ProblemSection({ product }: { product: Product }) {
-  const showManImage = product.id === 'coloflora'
+  const manImage = MAN_IMAGES[product.id]
 
   return (
     <section className="py-14">
       <div className="container-custom">
-        {showManImage && (
+        {manImage && (
           <div className="max-w-3xl mx-auto mb-10">
             <div className="rounded-3xl overflow-hidden shadow-xl">
               <img
-                src="/images/man-coloflora.jpg?v=2"
-                alt="COLOFLORA Before/After"
+                src={manImage}
+                alt={`${product.nameAr} Before/After`}
                 className="w-full h-auto object-cover"
               />
             </div>
