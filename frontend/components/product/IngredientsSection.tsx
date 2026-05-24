@@ -1,6 +1,23 @@
 import type { Product } from '@/lib/products'
 
 export default function IngredientsSection({ product }: { product: Product }) {
+  // For COLOFLORA, show single ingredients image instead of cards
+  if (product.id === 'coloflora') {
+    return (
+      <section className="py-14">
+        <div className="container-custom">
+          <div className="max-w-5xl mx-auto">
+            <img
+              src="/images/ingredients-coloflora.png"
+              alt="مكونات كولوفلورا"
+              className="w-full h-auto rounded-2xl shadow-lg"
+            />
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section className="py-14">
       <div className="container-custom">
