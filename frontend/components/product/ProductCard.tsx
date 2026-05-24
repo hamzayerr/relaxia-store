@@ -124,6 +124,21 @@ export default function ProductCard({ product }: { product: Product }) {
               ))}
             </div>
           )}
+
+          {/* Trust badges */}
+          <div className="grid grid-cols-4 gap-2 mt-4">
+            {[
+              { label: 'مصنوع في', sub: 'المغرب' },
+              { label: 'طبيعي', sub: '100%' },
+              { label: '30 كبسولة', sub: 'لكل علبة' },
+              { label: 'ضمان', sub: '30 يوم' },
+            ].map((b, i) => (
+              <div key={i} className="bg-white border border-brand-100 rounded-xl p-2 text-center">
+                <p className="font-cairo font-extrabold text-xs text-brand-900 leading-tight">{b.label}</p>
+                <p className="font-tajawal text-[10px] text-[#4A6555] mt-0.5">{b.sub}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Info */}
