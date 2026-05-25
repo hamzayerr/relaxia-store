@@ -262,7 +262,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'melanex',
     slug: 'melanex',
-    sku: 'vitiligo-cream50',
+    sku: 'vitiligo',
     nameAr: 'ميلانكس',
     nameFr: 'MELANEX',
     taglineAr: 'استعد لون بشرتك الطبيعي — مع ميلانكس',
