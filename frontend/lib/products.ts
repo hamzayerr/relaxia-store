@@ -272,9 +272,9 @@ export const PRODUCTS: Product[] = [
     volume: '50g',
     category: 'joints',
     images: {
-      hero: '/images/products/melanex/hero.png?v=1',
+      hero: '/images/products/melanex/hero.png?v=2',
       gallery: [
-        '/images/products/melanex/hero.png?v=1',
+        '/images/products/melanex/hero.png?v=2',
       ],
     },
     ingredients: [
