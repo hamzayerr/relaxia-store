@@ -4,12 +4,14 @@ const INGREDIENT_IMAGES: Record<string, string> = {
   coloflora: '/images/ingredients-coloflora.png?v=3',
   pylorex: '/images/ingredients-pylorex.png?v=1',
   flexima: '/images/ingredients-flexima.png?v=1',
+  melanex: '/images/ingredients-melanex.png?v=1',
 }
 
 const ALT_TEXTS: Record<string, string> = {
   coloflora: 'مكونات كولوفلورا',
   pylorex: 'مكونات بيلوريكس',
   flexima: 'مكونات فليكسيما',
+  melanex: 'مكونات ميلانكس',
 }
 
 export default function IngredientsSection({ product }: { product: Product }) {

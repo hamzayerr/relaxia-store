@@ -94,6 +94,7 @@ export default function ProductCard({ product }: { product: Product }) {
               coloflora: '/images/before-after-coloflora.png?v=2',
               flexima: '/images/before-after-flexima.png?v=5',
               pylorex: '/images/before-after-pylorex.png?v=5',
+              melanex: '/images/before-after-melanex.png?v=1',
             }
             const beforeAfter = beforeAfterMap[product.id]
             if (beforeAfter && activeImg === 0) {
@@ -186,6 +187,12 @@ export default function ProductCard({ product }: { product: Product }) {
                 'يقوي العضلات',
                 'تأثير سريع ومريح',
                 'مكونات طبيعية 100%',
+              ],
+              melanex: [
+                'يحفز الميلانين الطبيعي',
+                'يوحد لون البشرة تدريجيًا',
+                'ترطيب عميق وآمن',
+                'مكونات طبيعية 100% بلا كورتيزون',
               ],
             }
             const benefits = benefitsMap[product.id]
