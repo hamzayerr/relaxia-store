@@ -141,7 +141,9 @@ export default function ProductCard({ product }: { product: Product }) {
           <div className="grid grid-cols-3 gap-2 mt-4">
             {[
               { label: 'طبيعي', sub: '100%' },
-              { label: '30 كبسولة', sub: 'لكل علبة' },
+              product.type === 'capsule'
+                ? { label: `${product.capsules ?? 30} كبسولة`, sub: 'لكل علبة' }
+                : { label: product.volume ?? '50g', sub: 'لكل علبة' },
               { label: 'ضمان', sub: '30 يوم' },
             ].map((b, i) => (
               <div key={i} className="bg-white border border-brand-100 rounded-xl p-2 text-center">
