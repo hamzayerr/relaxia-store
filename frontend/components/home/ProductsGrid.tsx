@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useCartStore } from '@/lib/store/cartStore'
-import { PRODUCTS } from '@/lib/products'
+import { PRODUCTS, getOfferById } from '@/lib/products'
 import ProductImage from '@/components/common/ProductImage'
 import StarRating from '@/components/common/StarRating'
 import { Plus } from 'lucide-react'
@@ -15,12 +15,14 @@ export default function ProductsGrid() {
       <div className="container-custom">
         <div className="text-center mb-10">
           <p className="text-xs font-cairo font-bold text-brand-700 tracking-widest uppercase mb-2">منتجاتنا</p>
-          <h2 className="section-heading mb-2">ثلاث علاجات. ثلاث مشاكل. حل سريري واحد.</h2>
+          <h2 className="section-heading mb-2">أربعة علاجات. أربع مشاكل. حلول طبيعية مثبتة.</h2>
           <p className="section-subheading">كل فورمولا مصممة لمشكلة محددة — بمكونات مثبتة ونسب دقيقة</p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5">
-          {PRODUCTS.map(p => (
+          {PRODUCTS.map(p => {
+            const offer = getOfferById('one', p.id)
+            return (
             <div key={p.id} className="card group overflow-hidden">
               {/* Image */}
               <div className="relative aspect-square bg-[#F5F1E6] overflow-hidden">
@@ -42,13 +44,13 @@ export default function ProductsGrid() {
 
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="font-cairo font-extrabold text-xl text-brand-700">229 درهم</span>
-                    <span className="font-cairo text-sm text-gray-400 line-through mr-2">270 درهم</span>
+                    <span className="font-cairo font-extrabold text-xl text-brand-700">{offer.price} درهم</span>
+                    <span className="font-cairo text-sm text-gray-400 line-through mr-2">{offer.originalPrice} درهم</span>
                   </div>
                   <button
                     onClick={() => {
                       addItem(p, 'one')
-                      trackAddToCart({ productId: p.id, productName: p.nameAr, price: 229, quantity: 1 })
+                      trackAddToCart({ productId: p.id, productName: p.nameAr, price: offer.price, quantity: 1 })
                     }}
                     className="w-9 h-9 rounded-full bg-brand-700 flex items-center justify-center hover:bg-brand-800 transition-colors shadow-sm"
                   >
@@ -62,7 +64,7 @@ export default function ProductsGrid() {
                 </Link>
               </div>
             </div>
-          ))}
+          )})}
         </div>
       </div>
     </section>
