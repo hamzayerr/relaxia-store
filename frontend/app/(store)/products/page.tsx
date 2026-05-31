@@ -88,9 +88,40 @@ export default function CollectionPage() {
 
       <TrustBarSection />
 
-      <section className="py-16 bg-[#FAFAF8]">
-        <div className="container-custom space-y-8">
-          {PRODUCTS.map(p => <ProductFullCard key={p.id} product={p} />)}
+      <section className="py-12 bg-[#FAFAF8]">
+        <div className="container-custom">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+            {PRODUCTS.map(p => {
+              const offer = getOfferById('one', p.id)
+              return (
+                <div key={p.id} className="card group overflow-hidden">
+                  <div className="relative aspect-square bg-[#F5F1E6] overflow-hidden">
+                    <ProductImage
+                      src={p.images.hero} alt={p.nameAr}
+                      productId={p.id} productNameAr={p.nameAr} productNameFr={p.nameFr}
+                      fill className="!object-contain p-2 group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <span className="absolute top-3 right-3 bg-brand-700 text-white font-cairo font-bold text-[10px] px-2 py-0.5 rounded-full">
+                      {p.category === 'digestive' ? 'دعم الهضم' : 'المفاصل'}
+                    </span>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-cairo font-extrabold text-base sm:text-lg text-brand-900 mb-1">{p.nameAr}</h3>
+                    <p className="font-tajawal text-[#4A6555] text-xs sm:text-sm leading-relaxed mb-2 line-clamp-2">{p.taglineAr}</p>
+                    <StarRating rating={p.rating} count={p.reviewCount} size="sm" className="mb-3" />
+                    <div className="flex items-baseline gap-2 mb-3">
+                      <span className="font-cairo font-extrabold text-lg text-brand-700">{offer.price} درهم</span>
+                      <span className="font-cairo text-xs text-gray-400 line-through">{offer.originalPrice}</span>
+                    </div>
+                    <Link href={`/products/${p.slug}`}
+                      className="block w-full text-center text-xs sm:text-sm font-cairo font-bold text-white bg-brand-700 hover:bg-brand-800 transition-colors py-2 rounded-xl">
+                      اكتشف التفاصيل
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </section>
 
