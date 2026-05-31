@@ -171,7 +171,7 @@ function ThankYouContent() {
         </div>
 
         {/* Mini reviews */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
           {[
             { name: 'فاطمة م.', text: 'وصل في يومين، النتائج من الأسبوع الأول 🌟' },
             { name: 'عبد الله ك.', text: 'الفريق اتصل بسرعة وكانوا لطيفين جداً' },
@@ -188,14 +188,14 @@ function ThankYouContent() {
         {/* Cross-sells */}
         <div>
           <h3 className="font-cairo font-bold text-xl text-brand-900 mb-6 text-center">يمكنك كذلك تجربة:</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {PRODUCTS.slice(0, 3).map(p => (
-              <Link key={p.id} href={`/products/${p.slug}`} className="card p-4 hover:border-brand-300 text-center block">
-                <div className="relative h-28 rounded-xl overflow-hidden bg-brand-50 mb-3">
-                  <ProductImage src={p.images.hero} alt={p.nameAr} productId={p.id} productNameAr={p.nameAr} productNameFr={p.nameFr} fill />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {PRODUCTS.map(p => (
+              <Link key={p.id} href={`/products/${p.slug}`} className="card p-3 hover:border-brand-300 text-center block">
+                <div className="relative aspect-square rounded-xl overflow-hidden bg-brand-50 mb-2">
+                  <ProductImage src={p.images.hero} alt={p.nameAr} productId={p.id} productNameAr={p.nameAr} productNameFr={p.nameFr} fill className="!object-contain p-1" />
                 </div>
-                <p className="font-cairo font-bold text-sm text-brand-900 mb-1">{p.nameAr}</p>
-                <p className="font-cairo font-extrabold text-brand-700 text-sm">229 درهم</p>
+                <p className="font-cairo font-bold text-xs sm:text-sm text-brand-900 mb-1 line-clamp-1">{p.nameAr}</p>
+                <p className="font-cairo font-extrabold text-brand-700 text-xs sm:text-sm">من {p.id === 'melanex' ? '199' : p.id === 'flexima' ? '219' : '229'} درهم</p>
               </Link>
             ))}
           </div>
