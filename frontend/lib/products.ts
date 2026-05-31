@@ -338,7 +338,25 @@ export const OFFERS = [
   { id: 'three' as const, qty: 3, price: 430, originalPrice: 810, pricePerUnit: 143, label: '3 قطع', tag: '💰 أفضل قيمة', popular: false },
 ]
 
+// Product-specific offers (overrides default OFFERS)
+export const PRODUCT_OFFERS: Record<string, typeof OFFERS> = {
+  melanex: [
+    { id: 'one' as const, qty: 1, price: 199, originalPrice: 250, pricePerUnit: 199, label: '1 قطعة', tag: null, popular: false },
+    { id: 'two' as const, qty: 2, price: 329, originalPrice: 500, pricePerUnit: 164, label: '2 قطع', tag: '⭐ الأكثر مبيعًا', popular: true },
+    { id: 'three' as const, qty: 3, price: 469, originalPrice: 750, pricePerUnit: 156, label: '3 قطع', tag: '💰 أفضل قيمة', popular: false },
+  ],
+  pylorex: [
+    { id: 'one' as const, qty: 1, price: 229, originalPrice: 280, pricePerUnit: 229, label: '1 قطعة', tag: null, popular: false },
+    { id: 'two' as const, qty: 2, price: 399, originalPrice: 560, pricePerUnit: 199, label: '2 قطع', tag: '⭐ الأكثر مبيعًا', popular: true },
+    { id: 'three' as const, qty: 3, price: 569, originalPrice: 840, pricePerUnit: 189, label: '3 قطع', tag: '💰 أفضل قيمة', popular: false },
+  ],
+}
+
 export type OfferId = 'one' | 'two' | 'three'
+
+export function getOffersForProduct(productId: string) {
+  return PRODUCT_OFFERS[productId] || OFFERS
+}
 
 export function getProductBySlug(slug: string): Product | undefined {
   return PRODUCTS.find(p => p.slug === slug)
@@ -356,8 +374,9 @@ export function getCrossSells(productId: string): Product[] {
     .filter(Boolean) as Product[]
 }
 
-export function getOfferById(offerId: OfferId) {
-  return OFFERS.find(o => o.id === offerId) || OFFERS[1]
+export function getOfferById(offerId: OfferId, productId?: string) {
+  const offers = productId ? getOffersForProduct(productId) : OFFERS
+  return offers.find(o => o.id === offerId) || offers[1]
 }
 
 export function selectUpsellProduct(cartProductIds: string[]): Product | null {

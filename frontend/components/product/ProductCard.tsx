@@ -21,11 +21,11 @@ export default function ProductCard({ product }: { product: Product }) {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const router = useRouter()
-  const offer = getOfferById(selectedOffer)
+  const offer = getOfferById(selectedOffer, product.id)
 
   // Track ViewContent when product page loads
   useEffect(() => {
-    const price = getOfferById('one').price
+    const price = getOfferById('one', product.id).price
     // Facebook ViewContent
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'ViewContent', {
@@ -221,7 +221,7 @@ export default function ProductCard({ product }: { product: Product }) {
           {/* Offer selector */}
           <div>
             <p className="font-cairo font-bold text-brand-900 text-sm mb-2">اختار عرضك:</p>
-            <OfferSelector selected={selectedOffer} onChange={setSelectedOffer} />
+            <OfferSelector selected={selectedOffer} onChange={setSelectedOffer} productId={product.id} />
           </div>
 
           {/* Price */}

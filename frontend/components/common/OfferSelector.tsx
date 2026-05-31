@@ -1,18 +1,20 @@
 'use client'
 import { cn } from '@/lib/utils'
-import { OFFERS, type OfferId } from '@/lib/products'
+import { OFFERS, type OfferId, getOffersForProduct } from '@/lib/products'
 import { Check } from 'lucide-react'
 
 interface OfferSelectorProps {
   selected: OfferId
   onChange: (id: OfferId) => void
   className?: string
+  productId?: string
 }
 
-export default function OfferSelector({ selected, onChange, className }: OfferSelectorProps) {
+export default function OfferSelector({ selected, onChange, className, productId }: OfferSelectorProps) {
+  const offers = productId ? getOffersForProduct(productId) : OFFERS
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      {OFFERS.map(offer => (
+      {offers.map(offer => (
         <button
           key={offer.id}
           onClick={() => onChange(offer.id)}
