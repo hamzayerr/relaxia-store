@@ -4,7 +4,6 @@ import { useCartStore } from '@/lib/store/cartStore'
 import { PRODUCTS, getOfferById } from '@/lib/products'
 import ProductImage from '@/components/common/ProductImage'
 import StarRating from '@/components/common/StarRating'
-import { Plus } from 'lucide-react'
 import { trackAddToCart } from '@/lib/pixels'
 
 export default function ProductsGrid() {
@@ -19,7 +18,7 @@ export default function ProductsGrid() {
           <p className="section-subheading">كل فورمولا مصممة لمشكلة محددة — بمكونات مثبتة ونسب دقيقة</p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
           {PRODUCTS.map(p => {
             const offer = getOfferById('one', p.id)
             return (
@@ -37,29 +36,28 @@ export default function ProductsGrid() {
               </div>
 
               {/* Info */}
-              <div className="p-5">
-                <h3 className="font-cairo font-extrabold text-xl text-brand-900 mb-1">{p.nameAr}</h3>
-                <p className="font-tajawal text-[#4A6555] text-sm leading-relaxed mb-3">{p.taglineAr}</p>
-                <StarRating rating={p.rating} count={p.reviewCount} size="sm" className="mb-4" />
+              <div className="p-3 sm:p-5">
+                <h3 className="font-cairo font-extrabold text-base sm:text-xl text-brand-900 mb-1 line-clamp-1">{p.nameAr}</h3>
+                <p className="font-tajawal text-[#4A6555] text-xs sm:text-sm leading-relaxed mb-2 line-clamp-2">{p.taglineAr}</p>
+                <StarRating rating={p.rating} count={p.reviewCount} size="sm" className="mb-2 sm:mb-3" />
 
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="font-cairo font-extrabold text-xl text-brand-700">{offer.price} درهم</span>
-                    <span className="font-cairo text-sm text-gray-400 line-through mr-2">{offer.originalPrice} درهم</span>
-                  </div>
-                  <button
-                    onClick={() => {
-                      addItem(p, 'one')
-                      trackAddToCart({ productId: p.id, productName: p.nameAr, price: offer.price, quantity: 1 })
-                    }}
-                    className="w-9 h-9 rounded-full bg-brand-700 flex items-center justify-center hover:bg-brand-800 transition-colors shadow-sm"
-                  >
-                    <Plus className="w-4 h-4 text-white" />
-                  </button>
+                <div className="flex items-baseline gap-2 mb-2">
+                  <span className="font-cairo font-extrabold text-base sm:text-xl text-brand-700">{offer.price} درهم</span>
+                  <span className="font-cairo text-xs text-gray-400 line-through">{offer.originalPrice}</span>
                 </div>
 
+                <button
+                  onClick={() => {
+                    addItem(p, 'one')
+                    trackAddToCart({ productId: p.id, productName: p.nameAr, price: offer.price, quantity: 1 })
+                  }}
+                  className="w-full bg-brand-700 hover:bg-brand-800 text-white font-cairo font-bold text-xs sm:text-sm rounded-xl py-2 transition-colors mb-1.5"
+                >
+                  اطلب الآن +
+                </button>
+
                 <Link href={`/products/${p.slug}`}
-                  className="block w-full text-center mt-3 text-sm font-cairo font-bold text-brand-700 hover:text-brand-900 transition-colors py-2 border border-brand-200 rounded-xl hover:bg-brand-50">
+                  className="block w-full text-center text-xs font-cairo font-bold text-brand-700 hover:text-brand-900 transition-colors py-1.5 border border-brand-200 rounded-xl hover:bg-brand-50">
                   اكتشف التفاصيل
                 </Link>
               </div>
