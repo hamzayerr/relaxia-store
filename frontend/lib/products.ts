@@ -350,6 +350,11 @@ export const PRODUCT_OFFERS: Record<string, typeof OFFERS> = {
     { id: 'two' as const, qty: 2, price: 399, originalPrice: 560, pricePerUnit: 199, label: '2 قطع', tag: '⭐ الأكثر مبيعًا', popular: true },
     { id: 'three' as const, qty: 3, price: 569, originalPrice: 840, pricePerUnit: 189, label: '3 قطع', tag: '💰 أفضل قيمة', popular: false },
   ],
+  flexima: [
+    { id: 'one' as const, qty: 1, price: 219, originalPrice: 270, pricePerUnit: 219, label: '1 قطعة', tag: null, popular: false },
+    { id: 'two' as const, qty: 2, price: 333, originalPrice: 540, pricePerUnit: 166, label: '2 قطع', tag: '⭐ الأكثر مبيعًا', popular: true },
+    { id: 'three' as const, qty: 3, price: 469, originalPrice: 810, pricePerUnit: 156, label: '3 قطع', tag: '💰 أفضل قيمة', popular: false },
+  ],
 }
 
 export type OfferId = 'one' | 'two' | 'three'
