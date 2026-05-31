@@ -153,7 +153,7 @@ export default function CheckoutModal() {
 
           {/* Trust */}
           <div className="mt-4 flex flex-wrap justify-center gap-3">
-            {['🔒 الدفع عند الاستلام', '🏅 ضمان 30 يوم', '🚚 توصيل 48 ساعة'].map(t => (
+            {['🔒 الدفع عند الاستلام', '🏅 ضمان 30 يوم', '🚚 توصيل من 24 إلى 48 ساعة'].map(t => (
               <span key={t} className="text-xs font-tajawal text-[#4A6555]">{t}</span>
             ))}
           </div>
