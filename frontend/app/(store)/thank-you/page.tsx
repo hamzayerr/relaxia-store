@@ -49,9 +49,31 @@ function ThankYouContent() {
             var orderId = url.searchParams.get('order') || '';
             var pid = url.searchParams.get('pid') || 'coloflora';
             if (!orderId) return;
+            // Use orderId as eventID for deduplication with Conversions API
             function fire() {
-              try { if (typeof window.fbq === 'function') window.fbq('track', 'Purchase', { value: price, currency: 'MAD', content_ids: [pid], content_type: 'product' }); } catch(e) {}
-              try { if (typeof window.ttq !== 'undefined' && typeof window.ttq.track === 'function') window.ttq.track('CompletePayment', { value: price, currency: 'MAD', content_id: pid, content_type: 'product', quantity: 1 }); } catch(e) {}
+              try {
+                if (typeof window.fbq === 'function') {
+                  window.fbq('track', 'Purchase', {
+                    value: price,
+                    currency: 'MAD',
+                    content_ids: [pid],
+                    content_type: 'product',
+                    order_id: orderId
+                  }, { eventID: orderId });
+                }
+              } catch(e) {}
+              try {
+                if (typeof window.ttq !== 'undefined' && typeof window.ttq.track === 'function') {
+                  window.ttq.track('CompletePayment', {
+                    value: price,
+                    currency: 'MAD',
+                    content_id: pid,
+                    content_type: 'product',
+                    quantity: 1,
+                    order_id: orderId
+                  }, { event_id: orderId });
+                }
+              } catch(e) {}
             }
             setTimeout(fire, 2500);
           })();
