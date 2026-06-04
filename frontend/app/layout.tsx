@@ -42,6 +42,9 @@ export const metadata: Metadata = {
     apple: '/logo.png',
     shortcut: '/logo.png',
   },
+  other: {
+    'facebook-domain-verification': 'aeahdium0tq88plpv2snt64jms05tx',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
