@@ -10,7 +10,7 @@ import TrustBadges from '@/components/common/TrustBadges'
 export default function FinalCTASection({ product }: { product: Product }) {
   const [selectedOffer, setSelectedOffer] = useState<OfferId>('two')
   const addItem = useCartStore(s => s.addItem)
-  const offer = getOfferById(selectedOffer)
+  const offer = getOfferById(selectedOffer, product.id)
 
   return (
     <section className="py-16 bg-brand-900 text-white">
@@ -20,7 +20,7 @@ export default function FinalCTASection({ product }: { product: Product }) {
           <p className="font-tajawal text-white/70 mb-8">الدفع عند الاستلام. ضمان 30 يوم. توصيل مجاني.</p>
 
           <div className="bg-white/10 rounded-2xl p-6 mb-6">
-            <OfferSelector selected={selectedOffer} onChange={setSelectedOffer} />
+            <OfferSelector selected={selectedOffer} onChange={setSelectedOffer} productId={product.id} />
           </div>
 
           <Button
