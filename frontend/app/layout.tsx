@@ -1,28 +1,23 @@
 import type { Metadata } from 'next'
-import { Cairo, Tajawal, Inter } from 'next/font/google'
+import { Cairo, Tajawal } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import PixelLoader from '@/components/common/PixelLoader'
 
 const cairo = Cairo({
   subsets: ['arabic'],
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400', '700', '800'],
   variable: '--font-cairo',
   display: 'swap',
+  preload: true,
 })
 
 const tajawal = Tajawal({
   subsets: ['arabic'],
-  weight: ['400', '500', '700'],
+  weight: ['400', '700'],
   variable: '--font-tajawal',
   display: 'swap',
-})
-
-const inter = Inter({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-inter',
-  display: 'swap',
+  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -49,19 +44,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ar" dir="rtl" className={`${cairo.variable} ${tajawal.variable} ${inter.variable}`}>
+    <html lang="ar" dir="rtl" className={`${cairo.variable} ${tajawal.variable}`}>
       <head>
-        {/* Preload critical product images for instant display */}
-        <link rel="preload" as="image" href="/images/products/coloflora/hero.png?v=2" />
-        <link rel="preload" as="image" href="/images/products/pylorex/hero.png?v=2" />
-        <link rel="preload" as="image" href="/images/products/flexima/hero.png?v=2" />
-        <link rel="preload" as="image" href="/images/products/melanex/hero.png?v=2" />
+        {/* Preconnect for critical third-parties */}
+        <link rel="preconnect" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://www.facebook.com" />
+        <link rel="dns-prefetch" href="https://analytics.tiktok.com" />
       </head>
       <body>
         {children}
         <PixelLoader />
-        {/* Facebook Pixel */}
-        <Script id="fb-pixel" strategy="afterInteractive">
+        {/* Facebook Pixel — lazy loaded for better performance */}
+        <Script id="fb-pixel" strategy="lazyOnload">
           {`
             !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
             fbq('init', '974930055129956');
@@ -69,7 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
         <noscript>
-          <img height="1" width="1" style={{display:'none'}} src="https://www.facebook.com/tr?id=974930055129956&ev=PageView&noscript=1" />
+          <img height="1" width="1" style={{display:'none'}} src="https://www.facebook.com/tr?id=974930055129956&ev=PageView&noscript=1" alt="" />
         </noscript>
       </body>
     </html>
