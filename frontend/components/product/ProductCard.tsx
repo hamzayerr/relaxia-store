@@ -73,10 +73,8 @@ export default function ProductCard({ product }: { product: Product }) {
     const orderId = `RLX-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}-${Math.floor(1000 + Math.random() * 9000)}`
     // Send to sheets in background
     createOrder(form, [{ product, offerId: selectedOffer, quantity: 1 }], offer.price, orderId).catch(() => {})
-    // Facebook Purchase event
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-      (window as any).fbq('track', 'Purchase', { value: offer.price, currency: 'MAD', content_ids: [product.id], content_type: 'product' })
-    }
+    // Note: Purchase event is fired on thank-you page with proper eventID for CAPI deduplication
+    // Do NOT fire Purchase here (would cause duplicate events)
     // Redirect after React render cycle
     setTimeout(() => {
       window.location.href = `/thank-you?order=${orderId}&phone=${encodeURIComponent(form.phone)}&name=${encodeURIComponent(form.name)}&price=${offer.price}&pid=${product.id}`
