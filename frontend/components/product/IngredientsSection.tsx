@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { Product } from '@/lib/products'
 
 const INGREDIENT_IMAGES: Record<string, string> = {
@@ -23,10 +24,15 @@ export default function IngredientsSection({ product }: { product: Product }) {
       <section className="py-8 lg:py-14">
         <div className="lg:container-custom">
           <div className="lg:max-w-5xl lg:mx-auto">
-            <img
+            <Image
               src={ingredientImage}
               alt={ALT_TEXTS[product.id] || 'المكونات'}
+              width={1200}
+              height={1600}
+              sizes="(max-width: 1024px) 100vw, 1024px"
               className="w-full h-auto lg:rounded-2xl lg:shadow-lg"
+              loading="lazy"
+              quality={75}
             />
           </div>
         </div>

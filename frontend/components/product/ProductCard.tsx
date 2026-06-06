@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import ProductImage from '@/components/common/ProductImage'
 import { type Product, type OfferId, getOfferById } from '@/lib/products'
 import StarRating from '@/components/common/StarRating'
@@ -98,10 +99,15 @@ export default function ProductCard({ product }: { product: Product }) {
             if (beforeAfter && activeImg === 0) {
               return (
                 <div className="rounded-2xl overflow-hidden bg-brand-50">
-                  <img
+                  <Image
                     src={beforeAfter}
                     alt={product.nameAr}
+                    width={1200}
+                    height={1200}
+                    sizes="(max-width: 768px) 100vw, 600px"
                     className="w-full h-auto"
+                    priority
+                    quality={80}
                   />
                 </div>
               )

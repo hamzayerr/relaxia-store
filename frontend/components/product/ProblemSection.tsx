@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import type { Product } from '@/lib/products'
 
 const MAN_IMAGES: Record<string, string> = {
@@ -15,11 +16,15 @@ export default function ProblemSection({ product }: { product: Product }) {
       <div className="container-custom">
         {manImage && (
           <div className="max-w-3xl mx-auto mb-10">
-            <div className="rounded-3xl overflow-hidden shadow-xl">
-              <img
+            <div className="rounded-3xl overflow-hidden shadow-xl relative aspect-square">
+              <Image
                 src={manImage}
                 alt={`${product.nameAr} Before/After`}
-                className="w-full h-auto object-cover"
+                fill
+                sizes="(max-width: 768px) 100vw, 768px"
+                className="object-cover"
+                loading="lazy"
+                quality={75}
               />
             </div>
           </div>
