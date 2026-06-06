@@ -50,6 +50,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl" className={`${cairo.variable} ${tajawal.variable} ${inter.variable}`}>
+      <head>
+        {/* Preload critical product images for instant display */}
+        <link rel="preload" as="image" href="/images/products/coloflora/hero.png?v=2" />
+        <link rel="preload" as="image" href="/images/products/pylorex/hero.png?v=2" />
+        <link rel="preload" as="image" href="/images/products/flexima/hero.png?v=2" />
+        <link rel="preload" as="image" href="/images/products/melanex/hero.png?v=2" />
+      </head>
       <body>
         {children}
         <PixelLoader />

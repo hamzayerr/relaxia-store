@@ -88,7 +88,9 @@ export default function ProductImage({
       <Image
         src={src} alt={alt} fill priority={priority}
         className={cn('object-cover', className)}
-        sizes={sizes || '(max-width: 768px) 100vw, 50vw'}
+        sizes={sizes || '(max-width: 768px) 50vw, 25vw'}
+        quality={70}
+        loading={priority ? 'eager' : 'lazy'}
         onError={() => setError(true)}
       />
     )
@@ -96,8 +98,11 @@ export default function ProductImage({
 
   return (
     <Image
-      src={src} alt={alt} width={1000} height={1000} priority={priority}
+      src={src} alt={alt} width={600} height={600} priority={priority}
       className={cn('object-contain w-full h-full', className)}
+      quality={70}
+      sizes="(max-width: 768px) 50vw, 25vw"
+      loading={priority ? 'eager' : 'lazy'}
       onError={() => setError(true)}
     />
   )
