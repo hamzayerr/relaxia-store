@@ -4,10 +4,10 @@ import Image from 'next/image'
 const DATA: Record<string, { title: string; subtitle: string; images: { src: string; label: string }[] }> = {
   melanex: {
     title: 'نتائج حقيقية على البشرة',
-    subtitle: 'استعادة لون البشرة بشكل طبيعي وآمن — للرجال والنساء',
+    subtitle: 'يستعمل للرجال والنساء — استعادة لون البشرة طبيعيًا وآمنًا',
     images: [
-      { src: '/images/before-after-melanex.png?v=2', label: 'نتائج على الظهر — للنساء' },
-      { src: '/images/man-melanex.jpg?v=3', label: 'نتائج على الظهر — للرجال' },
+      { src: '/images/before-after-melanex.png?v=4', label: 'للنساء — استعادة لون البشرة' },
+      { src: '/images/man-melanex.jpg?v=4', label: 'للرجال — نتائج طبيعية ومضمونة' },
     ],
   },
 }
