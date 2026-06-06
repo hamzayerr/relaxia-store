@@ -5,7 +5,7 @@ const MAN_IMAGES: Record<string, string> = {
   coloflora: '/images/man-coloflora.jpg?v=2',
   pylorex: '/images/man-pylorex.jpg?v=5',
   flexima: '/images/man-flexima.jpg?v=5',
-  melanex: '/images/man-melanex.jpg?v=2',
+  // melanex shows back results in BackResultsSection instead
 }
 
 export default function ProblemSection({ product }: { product: Product }) {

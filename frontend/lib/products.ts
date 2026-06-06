@@ -275,7 +275,6 @@ export const PRODUCTS: Product[] = [
       hero: '/images/products/melanex/hero.png?v=2',
       gallery: [
         '/images/products/melanex/hero.png?v=2',
-        '/images/before-after-melanex-hands.png?v=1',
       ],
     },
     ingredients: [

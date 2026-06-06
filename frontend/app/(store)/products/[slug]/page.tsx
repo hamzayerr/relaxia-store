@@ -5,6 +5,7 @@ import ProductCard from '@/components/product/ProductCard'
 import ProblemSection from '@/components/product/ProblemSection'
 import SolutionSection from '@/components/product/SolutionSection'
 import ProblemSolutionSection from '@/components/product/ProblemSolutionSection'
+import BackResultsSection from '@/components/product/BackResultsSection'
 import IngredientsSection from '@/components/product/IngredientsSection'
 import TestimonialsSection from '@/components/product/TestimonialsSection'
 import GuaranteeSection from '@/components/product/GuaranteeSection'
@@ -45,6 +46,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       <ProblemSection product={product} />
       <ProblemSolutionSection productId={product.id} />
+      <BackResultsSection productId={product.id} />
       <SolutionSection product={product} />
       <IngredientsSection product={product} />
       <TestimonialsSection product={product} />
