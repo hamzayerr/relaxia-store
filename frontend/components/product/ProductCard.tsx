@@ -135,7 +135,7 @@ export default function ProductCard({ product }: { product: Product }) {
                     width={1200}
                     height={1200}
                     sizes="(max-width: 768px) 100vw, 600px"
-                    className="w-full h-auto max-h-[60vh] lg:max-h-none object-cover"
+                    className="w-full h-auto max-h-[60vh] lg:max-h-none object-cover object-top"
                     priority
                     quality={80}
                   />
@@ -153,7 +153,7 @@ export default function ProductCard({ product }: { product: Product }) {
                   productNameAr={product.nameAr}
                   productNameFr={product.nameFr}
                   fill
-                  className="object-cover object-center"
+                  className={isHero ? 'object-cover object-center' : 'object-cover object-top'}
                   priority
                 />
               </div>
