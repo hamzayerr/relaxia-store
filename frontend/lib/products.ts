@@ -351,7 +351,7 @@ export const PRODUCTS: Product[] = [
       ],
     },
     ingredients: [
-      { nameAr: 'زيت الأركان', nameFr: 'Huile d\'argan', benefit: 'يرطب الأظافر والجلد المحيط بها بعمق ويغذيها من الخارج', icon: '🌰' },
+      { nameAr: 'زيت الأركان', nameFr: 'Huile d\'argan', benefit: 'يرطب الأظافر والجلد المحيط بها بعمق ويغذيها من الخارج', icon: '🌿' },
       { nameAr: 'البيوتين', nameFr: 'Biotine', benefit: 'يعزز نمو الأظافر ويحسن من قوتها ومرونتها', icon: '💊' },
       { nameAr: 'فيتامين E', nameFr: 'Vitamine E', benefit: 'مضاد أكسدة يحمي الأظافر ويمنح مظهرًا صحيًا ولامعًا', icon: '✨' },
     ],

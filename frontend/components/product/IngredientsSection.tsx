@@ -6,7 +6,6 @@ const INGREDIENT_IMAGES: Record<string, string> = {
   pylorex: '/images/ingredients-pylorex.png?v=1',
   flexima: '/images/ingredients-flexima.png?v=1',
   melanex: '/images/ingredients-melanex.png?v=2',
-  keranex: '/images/ingredients-keranex.png?v=1',
 }
 
 const ALT_TEXTS: Record<string, string> = {
@@ -14,7 +13,6 @@ const ALT_TEXTS: Record<string, string> = {
   pylorex: 'مكونات بيلوريكس',
   flexima: 'مكونات فليكسيما',
   melanex: 'مكونات ميلانكس',
-  keranex: 'مكونات كيرانكس',
 }
 
 export default function IngredientsSection({ product }: { product: Product }) {
@@ -54,7 +52,9 @@ export default function IngredientsSection({ product }: { product: Product }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {product.ingredients.map((ing, i) => (
             <div key={i} className="card p-6 text-center hover:border-brand-300">
-              <div className="text-4xl mb-3">{ing.icon || '🌿'}</div>
+              <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-green-100 flex items-center justify-center">
+                <span className="text-3xl text-green-700">{ing.icon || '🌿'}</span>
+              </div>
               <h3 className="font-cairo font-bold text-brand-900 text-base mb-1">{ing.nameAr}</h3>
               <p className="font-tajawal text-xs text-[#4A6555] mb-2 italic">{ing.nameFr}</p>
               {(ing.percentage || ing.amount) && (
