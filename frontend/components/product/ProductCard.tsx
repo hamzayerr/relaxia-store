@@ -123,7 +123,7 @@ export default function ProductCard({ product }: { product: Product }) {
               flexima: '/images/before-after-flexima.png?v=5',
               pylorex: '/images/before-after-pylorex.png?v=5',
               melanex: '/images/before-after-melanex-hands.png?v=4',
-              keranex: '/images/products/keranex/before-after-hands.png?v=1',
+              keranex: '/images/products/keranex/before-after-feet.png?v=1',
             }
             const beforeAfter = beforeAfterMap[product.id]
             if (beforeAfter && activeImg === 0) {
@@ -142,16 +142,18 @@ export default function ProductCard({ product }: { product: Product }) {
                 </div>
               )
             }
+            const currentSrc = product.images.gallery[activeImg] || product.images.hero
+            const isHero = currentSrc.includes('/hero.')
             return (
-              <div className="relative aspect-[3/4] max-h-[60vh] lg:max-h-none rounded-2xl overflow-hidden bg-brand-50">
+              <div className={`relative ${isHero ? 'aspect-square' : 'aspect-[3/4]'} max-h-[60vh] lg:max-h-none rounded-2xl overflow-hidden bg-brand-50`}>
                 <ProductImage
-                  src={product.images.gallery[activeImg] || product.images.hero}
+                  src={currentSrc}
                   alt={product.nameAr}
                   productId={product.id}
                   productNameAr={product.nameAr}
                   productNameFr={product.nameFr}
                   fill
-                  className="object-cover"
+                  className="object-cover object-center"
                   priority
                 />
               </div>
