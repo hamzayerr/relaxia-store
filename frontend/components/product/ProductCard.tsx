@@ -160,15 +160,15 @@ export default function ProductCard({ product }: { product: Product }) {
             )
           })()}
           {product.images.gallery.length > 1 && (
-            <div className="flex gap-2">
+            <div className="flex gap-3 justify-center">
               {product.images.gallery.map((img, i) => (
                 <button
                   key={i}
                   onClick={() => setActiveImg(i)}
-                  className={`relative w-[72px] h-[72px] min-w-[72px] min-h-[72px] rounded-xl overflow-hidden border-2 transition-colors flex-shrink-0
+                  className={`relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors flex-shrink-0
                     ${activeImg === i ? 'border-green-600' : 'border-brand-100 hover:border-brand-300'}`}
                 >
-                  <ProductImage src={img} alt={`صورة ${i + 1}`} productId={product.id} productNameAr={product.nameAr} productNameFr={product.nameFr} fill />
+                  <ProductImage src={img} alt={`صورة ${i + 1}`} productId={product.id} productNameAr={product.nameAr} productNameFr={product.nameFr} fill className="object-cover object-center" />
                 </button>
               ))}
             </div>
