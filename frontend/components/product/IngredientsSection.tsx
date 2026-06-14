@@ -52,8 +52,8 @@ export default function IngredientsSection({ product }: { product: Product }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {product.ingredients.map((ing, i) => (
             <div key={i} className="card p-6 text-center hover:border-brand-300">
-              <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-green-100 flex items-center justify-center">
-                <span className="text-3xl text-green-700">{ing.icon || '🌿'}</span>
+              <div className="w-fit mx-auto mb-3 rounded-full bg-green-100 p-4 flex items-center justify-center">
+                <span className="text-4xl text-green-700">{ing.icon || '🌿'}</span>
               </div>
               <h3 className="font-cairo font-bold text-brand-900 text-base mb-1">{ing.nameAr}</h3>
               <p className="font-tajawal text-xs text-[#4A6555] mb-2 italic">{ing.nameFr}</p>
