@@ -277,9 +277,9 @@ export default function ProductCard({ product }: { product: Product }) {
           <form id="order-form" onSubmit={handleSubmit} className="space-y-3 bg-brand-50 rounded-2xl p-4 border border-brand-100">
             <p className="font-cairo font-bold text-brand-900 text-sm text-center">أدخل معلوماتك لإتمام الطلب</p>
             <div>
-              <label className="block font-cairo font-bold text-brand-900 text-xs mb-1">الاسم الكامل</label>
+              <label className="block font-cairo font-bold text-brand-900 text-xs mb-1">الاسم</label>
               <input
-                type="text" placeholder="مثال: فاطمة الزهراء" value={form.name}
+                type="text" placeholder="مثال: فاطمة" value={form.name}
                 onChange={e => handleFieldChange('name', e.target.value)}
                 className={`w-full border rounded-xl px-4 py-3 font-tajawal text-sm text-right focus:outline-none bg-white
                   ${form.name === '' ? 'border-brand-200 focus:border-brand-500' : errors.name ? 'border-red-400 focus:border-red-500' : 'border-green-500 focus:border-green-600'}`}
