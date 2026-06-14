@@ -1,7 +1,22 @@
 'use client'
 import { useEffect, useState } from 'react'
 
-const NAMES = ['سعاد', 'فاطمة', 'خديجة', 'إيمان', 'نادية', 'أسماء', 'ريم']
+const NAMES = [
+  { name: 'سعاد', verb: 'طلبت' },
+  { name: 'فاطمة', verb: 'طلبت' },
+  { name: 'خديجة', verb: 'طلبت' },
+  { name: 'إيمان', verb: 'طلبت' },
+  { name: 'نادية', verb: 'طلبت' },
+  { name: 'أسماء', verb: 'طلبت' },
+  { name: 'ريم', verb: 'طلبت' },
+  { name: 'يوسف', verb: 'طلب' },
+  { name: 'محمد', verb: 'طلب' },
+  { name: 'أيوب', verb: 'طلب' },
+  { name: 'كريم', verb: 'طلب' },
+  { name: 'عمر', verb: 'طلب' },
+  { name: 'أنس', verb: 'طلب' },
+  { name: 'إلياس', verb: 'طلب' },
+]
 const CITIES = ['الرباط', 'الدار البيضاء', 'مراكش', 'فاس', 'أكادير', 'طنجة', 'مكناس']
 
 export default function SocialProofToast({ productNameAr }: { productNameAr: string }) {
@@ -11,10 +26,10 @@ export default function SocialProofToast({ productNameAr }: { productNameAr: str
     let hideTimer: ReturnType<typeof setTimeout>
 
     const show = () => {
-      const name = NAMES[Math.floor(Math.random() * NAMES.length)]
+      const { name, verb } = NAMES[Math.floor(Math.random() * NAMES.length)]
       const city = CITIES[Math.floor(Math.random() * CITIES.length)]
       const qty = Math.floor(Math.random() * 2) + 1
-      setMessage(`${name} من ${city} طلبت للتو ${qty} قطع من ${productNameAr} 🛒`)
+      setMessage(`${name} من ${city} ${verb} الآن ${qty} قطع من ${productNameAr} 🛒`)
       hideTimer = setTimeout(() => setMessage(null), 5000)
     }
 
