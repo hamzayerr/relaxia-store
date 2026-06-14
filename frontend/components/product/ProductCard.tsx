@@ -135,7 +135,7 @@ export default function ProductCard({ product }: { product: Product }) {
                     width={1200}
                     height={1200}
                     sizes="(max-width: 768px) 100vw, 600px"
-                    className="w-full h-auto"
+                    className="w-full h-auto max-h-[60vh] lg:max-h-none object-cover"
                     priority
                     quality={80}
                   />
@@ -143,7 +143,7 @@ export default function ProductCard({ product }: { product: Product }) {
               )
             }
             return (
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-brand-50">
+              <div className="relative aspect-[3/4] max-h-[60vh] lg:max-h-none rounded-2xl overflow-hidden bg-brand-50">
                 <ProductImage
                   src={product.images.gallery[activeImg] || product.images.hero}
                   alt={product.nameAr}
@@ -151,6 +151,7 @@ export default function ProductCard({ product }: { product: Product }) {
                   productNameAr={product.nameAr}
                   productNameFr={product.nameFr}
                   fill
+                  className="object-cover"
                   priority
                 />
               </div>
@@ -162,8 +163,8 @@ export default function ProductCard({ product }: { product: Product }) {
                 <button
                   key={i}
                   onClick={() => setActiveImg(i)}
-                  className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-colors flex-shrink-0
-                    ${activeImg === i ? 'border-brand-700' : 'border-brand-100 hover:border-brand-300'}`}
+                  className={`relative w-[72px] h-[72px] min-w-[72px] min-h-[72px] rounded-xl overflow-hidden border-2 transition-colors flex-shrink-0
+                    ${activeImg === i ? 'border-green-600' : 'border-brand-100 hover:border-brand-300'}`}
                 >
                   <ProductImage src={img} alt={`صورة ${i + 1}`} productId={product.id} productNameAr={product.nameAr} productNameFr={product.nameFr} fill />
                 </button>

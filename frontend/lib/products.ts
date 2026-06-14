@@ -346,6 +346,7 @@ export const PRODUCTS: Product[] = [
       hero: '/images/products/keranex/before-after-hands.png?v=1',
       gallery: [
         '/images/products/keranex/before-after-hands.png?v=1',
+        '/images/products/keranex/hero.png?v=2',
         '/images/products/keranex/before-after-feet.png?v=1',
       ],
     },
