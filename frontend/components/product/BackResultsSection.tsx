@@ -10,6 +10,13 @@ const DATA: Record<string, { title: string; subtitle: string; images: { src: str
       { src: '/images/man-melanex.jpg?v=4', label: 'للرجال — نتائج طبيعية ومضمونة' },
     ],
   },
+  keranex: {
+    title: 'النتيجة قبل و بعد',
+    subtitle: 'شوف الفرق بعد الاستعمال المنتظم لـ KERANEX',
+    images: [
+      { src: '/images/before-after-keranex.png?v=1', label: 'من أظافر هشة ومتكسرة إلى أظافر قوية ولامعة' },
+    ],
+  },
 }
 
 export default function BackResultsSection({ productId }: { productId: string }) {
@@ -28,7 +35,7 @@ export default function BackResultsSection({ productId }: { productId: string })
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 max-w-5xl mx-auto">
+        <div className={`grid grid-cols-1 ${data.images.length > 1 ? 'md:grid-cols-2 max-w-5xl' : 'max-w-2xl'} gap-4 lg:gap-6 mx-auto`}>
           {data.images.map((img, i) => (
             <div key={i} className="space-y-2">
               <div className="rounded-2xl overflow-hidden shadow-lg bg-white">

@@ -14,7 +14,7 @@ export default function ProductsGrid() {
       <div className="container-custom">
         <div className="text-center mb-10">
           <p className="text-xs font-cairo font-bold text-brand-700 tracking-widest uppercase mb-2">منتجاتنا</p>
-          <h2 className="section-heading mb-2">أربعة علاجات. أربع مشاكل. حلول طبيعية مثبتة.</h2>
+          <h2 className="section-heading mb-2">خمسة علاجات. خمس مشاكل. حلول طبيعية مثبتة.</h2>
           <p className="section-subheading">كل فورمولا مصممة لمشكلة محددة — بمكونات مثبتة ونسب دقيقة</p>
         </div>
 
@@ -31,7 +31,7 @@ export default function ProductsGrid() {
                   fill className="!object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                 />
                 <span className="absolute top-3 right-3 bg-brand-700 text-white font-cairo font-bold text-[10px] px-2 py-0.5 rounded-full">
-                  {p.category === 'digestive' ? 'دعم الهضم' : 'المفاصل'}
+                  {p.category === 'digestive' ? 'دعم الهضم' : p.category === 'joints' ? 'المفاصل' : 'العناية بالأظافر'}
                 </span>
               </div>
 
