@@ -145,7 +145,7 @@ export default function ProductCard({ product }: { product: Product }) {
             const currentSrc = product.images.gallery[activeImg] || product.images.hero
             const isHero = currentSrc.includes('/hero.')
             return (
-              <div className={`relative ${isHero ? 'aspect-square' : 'aspect-[3/4]'} max-h-[60vh] lg:max-h-none rounded-2xl overflow-hidden bg-brand-50`}>
+              <div className="relative aspect-square max-h-[60vh] lg:max-h-none rounded-2xl overflow-hidden bg-brand-50">
                 <ProductImage
                   src={currentSrc}
                   alt={product.nameAr}
