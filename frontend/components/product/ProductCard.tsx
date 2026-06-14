@@ -8,6 +8,8 @@ import StarRating from '@/components/common/StarRating'
 import OfferSelector from '@/components/common/OfferSelector'
 import PriceDisplay from '@/components/common/PriceDisplay'
 import ScarcityBanner from '@/components/common/ScarcityBanner'
+import TrustBarMarquee from '@/components/common/TrustBarMarquee'
+import SocialProofToast from '@/components/common/SocialProofToast'
 import { trackAddToCart, trackInitiateCheckout } from '@/lib/pixels'
 import { ShieldCheck, Truck, Leaf } from 'lucide-react'
 import { createOrder } from '@/lib/api'
@@ -21,8 +23,21 @@ export default function ProductCard({ product }: { product: Product }) {
   const [form, setForm] = useState({ name: '', phone: '', city: '' })
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [formVisible, setFormVisible] = useState(false)
   const router = useRouter()
   const offer = getOfferById(selectedOffer, product.id)
+
+  // Hide the sticky mobile CTA when the order form is already on screen
+  useEffect(() => {
+    const formEl = document.getElementById('order-form')
+    if (!formEl) return
+    const observer = new IntersectionObserver(
+      ([entry]) => setFormVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    )
+    observer.observe(formEl)
+    return () => observer.disconnect()
+  }, [])
 
   // Track ViewContent when product page loads
   useEffect(() => {
@@ -48,13 +63,27 @@ export default function ProductCard({ product }: { product: Product }) {
     }
   }, [product.id])
 
+  const validateField = (field: 'name' | 'phone' | 'city', value: string): string => {
+    if (field === 'name') return value.trim().length < 2 ? 'أدخل اسمك الكامل' : ''
+    if (field === 'phone') return !/^0[5-7]\d{8}$/.test(value.trim()) ? 'أدخل رقم هاتف صحيح (مثال: 0612345678)' : ''
+    if (field === 'city') return !value.trim() ? 'أدخل مدينتك' : ''
+    return ''
+  }
+
+  const handleFieldChange = (field: 'name' | 'phone' | 'city', value: string) => {
+    setForm(p => ({ ...p, [field]: value }))
+    setErrors(prev => ({ ...prev, [field]: validateField(field, value) }))
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const errs: Record<string, string> = {}
-    if (!form.name.trim()) errs.name = 'أدخل اسمك'
-    if (form.phone.trim().length < 9) errs.phone = 'أدخل رقم هاتفك'
-    if (!form.city.trim()) errs.city = 'أدخل مدينتك'
-    if (Object.keys(errs).length) { setErrors(errs); return }
+    const errs: Record<string, string> = {
+      name: validateField('name', form.name),
+      phone: validateField('phone', form.phone),
+      city: validateField('city', form.city),
+    }
+    setErrors(errs)
+    if (Object.values(errs).some(Boolean)) return
     setErrors({})
     setLoading(true)
     try { trackAddToCart({ productId: product.id, productName: product.nameAr, price: offer.price, quantity: 1 }) } catch {}
@@ -94,6 +123,7 @@ export default function ProductCard({ product }: { product: Product }) {
               flexima: '/images/before-after-flexima.png?v=5',
               pylorex: '/images/before-after-pylorex.png?v=5',
               melanex: '/images/before-after-melanex-hands.png?v=4',
+              keranex: '/images/products/keranex/before-after-hands.png?v=1',
             }
             const beforeAfter = beforeAfterMap[product.id]
             if (beforeAfter && activeImg === 0) {
@@ -239,40 +269,52 @@ export default function ProductCard({ product }: { product: Product }) {
           {/* Scarcity */}
           <ScarcityBanner />
 
+          {/* Trust bar */}
+          <TrustBarMarquee />
+
           {/* Inline order form */}
           <form id="order-form" onSubmit={handleSubmit} className="space-y-3 bg-brand-50 rounded-2xl p-4 border border-brand-100">
             <p className="font-cairo font-bold text-brand-900 text-sm text-center">أدخل معلوماتك لإتمام الطلب</p>
             <div>
+              <label className="block font-cairo font-bold text-brand-900 text-xs mb-1">الاسم الكامل</label>
               <input
-                type="text" placeholder="الاسم الكامل" value={form.name}
-                onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
-                className="w-full border border-brand-200 rounded-xl px-4 py-3 font-tajawal text-sm text-right focus:outline-none focus:border-brand-500 bg-white"
+                type="text" placeholder="مثال: فاطمة الزهراء" value={form.name}
+                onChange={e => handleFieldChange('name', e.target.value)}
+                className={`w-full border rounded-xl px-4 py-3 font-tajawal text-sm text-right focus:outline-none bg-white
+                  ${form.name === '' ? 'border-brand-200 focus:border-brand-500' : errors.name ? 'border-red-400 focus:border-red-500' : 'border-green-500 focus:border-green-600'}`}
               />
               {errors.name && <p className="text-red-500 text-xs mt-1 font-tajawal">{errors.name}</p>}
             </div>
             <div>
+              <label className="block font-cairo font-bold text-brand-900 text-xs mb-1">رقم الهاتف</label>
               <input
-                type="tel" placeholder="0612345678" value={form.phone} dir="ltr" style={{textAlign: 'right'}}
-                onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
-                className="w-full border border-brand-200 rounded-xl px-4 py-3 font-tajawal text-sm focus:outline-none focus:border-brand-500 bg-white"
+                type="tel" placeholder="0612 345 678" value={form.phone} dir="ltr" style={{textAlign: 'right'}}
+                onChange={e => handleFieldChange('phone', e.target.value)}
+                className={`w-full border rounded-xl px-4 py-3 font-tajawal text-sm focus:outline-none bg-white
+                  ${form.phone === '' ? 'border-brand-200 focus:border-brand-500' : errors.phone ? 'border-red-400 focus:border-red-500' : 'border-green-500 focus:border-green-600'}`}
               />
               {errors.phone && <p className="text-red-500 text-xs mt-1 font-tajawal">{errors.phone}</p>}
             </div>
             <div>
+              <label className="block font-cairo font-bold text-brand-900 text-xs mb-1">المدينة</label>
               <input
-                type="text" placeholder="المدينة" value={form.city}
-                onChange={e => setForm(p => ({ ...p, city: e.target.value }))}
-                className="w-full border border-brand-200 rounded-xl px-4 py-3 font-tajawal text-sm text-right focus:outline-none focus:border-brand-500 bg-white"
+                type="text" placeholder="مثال: الدار البيضاء" value={form.city}
+                onChange={e => handleFieldChange('city', e.target.value)}
+                className={`w-full border rounded-xl px-4 py-3 font-tajawal text-sm text-right focus:outline-none bg-white
+                  ${form.city === '' ? 'border-brand-200 focus:border-brand-500' : errors.city ? 'border-red-400 focus:border-red-500' : 'border-green-500 focus:border-green-600'}`}
               />
               {errors.city && <p className="text-red-500 text-xs mt-1 font-tajawal">{errors.city}</p>}
             </div>
             <button
               type="submit" disabled={loading}
-              className="w-full bg-brand-700 hover:bg-brand-800 text-white font-cairo font-bold text-lg rounded-2xl py-4 transition-colors disabled:opacity-70"
+              className="w-full bg-brand-700 hover:bg-brand-800 text-white font-cairo font-bold text-lg rounded-2xl py-4 transition-colors disabled:opacity-70 flex items-center justify-center gap-2"
             >
+              {loading && (
+                <span className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+              )}
               {loading ? 'جاري الإرسال...' : `تأكيد الطلب — ${offer.price} درهم ←`}
             </button>
-            <p className="text-center font-tajawal text-xs text-[#4A6555]">الدفع عند الاستلام — بدون بطاقة بنكية</p>
+            <p className="text-center font-tajawal text-xs text-[#4A6555]">✓ معلوماتك آمنة — ما غادي تدفع حتى تستلم</p>
           </form>
 
           {/* Mini trust */}
@@ -308,14 +350,18 @@ export default function ProductCard({ product }: { product: Product }) {
       </div>
 
       {/* Sticky mobile CTA */}
-      <StickyBar product={product} selectedOffer={selectedOffer} price={offer.price} />
+      <StickyBar product={product} selectedOffer={selectedOffer} price={offer.price} hidden={formVisible} />
+
+      {/* Social proof toast */}
+      <SocialProofToast productNameAr={product.nameAr} />
     </section>
   )
 }
 
-function StickyBar({ product, price }: { product: Product; selectedOffer: OfferId; price: number }) {
+function StickyBar({ product, price, hidden }: { product: Product; selectedOffer: OfferId; price: number; hidden: boolean }) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-30 lg:hidden bg-white border-t border-brand-100 shadow-up p-3">
+    <div className={`fixed bottom-0 left-0 right-0 z-30 lg:hidden bg-white border-t border-brand-100 shadow-up p-3 transition-transform duration-300
+      ${hidden ? 'translate-y-full' : 'translate-y-0'}`}>
       <div className="flex items-center gap-3 max-w-md mx-auto">
         <div className="flex-1">
           <p className="font-cairo font-bold text-brand-900 text-sm truncate">{product.nameAr}</p>
@@ -323,7 +369,7 @@ function StickyBar({ product, price }: { product: Product; selectedOffer: OfferI
             {price} درهم
           </p>
         </div>
-        <a href="#order-form" className="bg-brand-700 text-white font-cairo font-bold text-sm rounded-xl px-4 py-2 flex-shrink-0">
+        <a href="#order-form" className="bg-green-600 hover:bg-green-700 text-white font-cairo font-bold text-sm rounded-xl px-4 py-2 flex-shrink-0">
           اطلب الآن ←
         </a>
       </div>

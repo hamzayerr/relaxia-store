@@ -48,6 +48,7 @@ const config: Config = {
         'slide-in-left': 'slideInLeft 0.3s ease',
         'scale-in': 'scaleIn 0.25s ease',
         'bounce-once': 'bounceOnce 0.4s ease',
+        'marquee': 'marquee 20s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -65,6 +66,10 @@ const config: Config = {
         bounceOnce: {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.2)' },
+        },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
         },
       },
     },

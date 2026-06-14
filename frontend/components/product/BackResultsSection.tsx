@@ -12,9 +12,10 @@ const DATA: Record<string, { title: string; subtitle: string; images: { src: str
   },
   keranex: {
     title: 'النتيجة قبل و بعد',
-    subtitle: 'شوف الفرق بعد الاستعمال المنتظم لـ KERANEX',
+    subtitle: 'شوف الفرق بعد الاستعمال المنتظم لـ KERANEX على اليدين والقدمين',
     images: [
-      { src: '/images/before-after-keranex.png?v=1', label: 'من أظافر هشة ومتكسرة إلى أظافر قوية ولامعة' },
+      { src: '/images/products/keranex/before-after-hands.png?v=1', label: 'لليدين — من أظافر هشة ومتكسرة إلى أظافر قوية ولامعة' },
+      { src: '/images/products/keranex/before-after-feet.png?v=1', label: 'للقدمين — من فطريات وأظافر متضررة إلى أظافر صحية' },
     ],
   },
 }

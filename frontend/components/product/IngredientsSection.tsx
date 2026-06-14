@@ -6,6 +6,7 @@ const INGREDIENT_IMAGES: Record<string, string> = {
   pylorex: '/images/ingredients-pylorex.png?v=1',
   flexima: '/images/ingredients-flexima.png?v=1',
   melanex: '/images/ingredients-melanex.png?v=2',
+  keranex: '/images/ingredients-keranex.png?v=1',
 }
 
 const ALT_TEXTS: Record<string, string> = {
@@ -13,6 +14,7 @@ const ALT_TEXTS: Record<string, string> = {
   pylorex: 'مكونات بيلوريكس',
   flexima: 'مكونات فليكسيما',
   melanex: 'مكونات ميلانكس',
+  keranex: 'مكونات كيرانكس',
 }
 
 export default function IngredientsSection({ product }: { product: Product }) {

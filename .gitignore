@@ -10,3 +10,4 @@ __pycache__/
 Thumbs.db
 *.node
 frontend/public/images/_original/
+frontend/data/

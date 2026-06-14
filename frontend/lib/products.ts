@@ -347,7 +347,6 @@ export const PRODUCTS: Product[] = [
       gallery: [
         '/images/products/keranex/before-after-hands.png?v=1',
         '/images/products/keranex/before-after-feet.png?v=1',
-        '/images/products/keranex/hero.png?v=2',
       ],
     },
     ingredients: [
@@ -418,6 +417,11 @@ export const PRODUCT_OFFERS: Record<string, typeof OFFERS> = {
     { id: 'one' as const, qty: 1, price: 219, originalPrice: 270, pricePerUnit: 219, label: '1 قطعة', tag: null, popular: false },
     { id: 'two' as const, qty: 2, price: 333, originalPrice: 540, pricePerUnit: 166, label: '2 قطع', tag: '⭐ الأكثر مبيعًا', popular: true },
     { id: 'three' as const, qty: 3, price: 469, originalPrice: 810, pricePerUnit: 156, label: '3 قطع', tag: '💰 أفضل قيمة', popular: false },
+  ],
+  keranex: [
+    { id: 'one' as const, qty: 1, price: 209, originalPrice: 270, pricePerUnit: 209, label: '1 قطعة', tag: null, popular: false },
+    { id: 'two' as const, qty: 2, price: 369, originalPrice: 540, pricePerUnit: 184, label: '2 قطع', tag: '⭐ الأكثر مبيعًا', popular: true },
+    { id: 'three' as const, qty: 3, price: 499, originalPrice: 810, pricePerUnit: 166, label: '3 قطع', tag: '💰 أفضل قيمة', popular: false },
   ],
 }
 
